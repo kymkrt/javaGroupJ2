@@ -1,0 +1,21 @@
+@charset "UTF-8";
+#mySidenav a {
+  position: absolute;
+  right: 80px;
+  transition: 0.3s;
+  padding: 15px;
+  width: 100px;
+  text-decoration: none;
+  font-size: 20px;
+  color: white;
+  border-radius: 0 5px 5px 0;
+}
+
+#mySidenav a:hover {
+  left: 50px;
+}
+
+#estimate {
+  top: 20px;
+  background-color: #04AA6D;
+}
