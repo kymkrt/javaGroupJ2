@@ -36,8 +36,11 @@ create table member (
 	todayCnt int default 0, /*오늘 방문 카운트*/
 	startDate datetime default now(), /*최초 가입일*/
 	lastDate datetime default now(), /*마지막 접속일(탈퇴시는 탈퇴한 날짜)*/
+	memoryMid varchar(30) not null, /*저장용 아이디*/
 	primary key(idx), /*이렇게 미리 해두면 좋다*/
 	unique key(mid)
 );
+
+select * from member;
 
 insert into member values(default,'admin','1234',);

@@ -16,6 +16,8 @@ public class MemberController extends HttpServlet{
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		MemberInterface command = null;
+		
 		String viewPage = "/WEB-INF/memberControl";
 		String com = request.getRequestURI();
 		com = com.substring(com.lastIndexOf("/"), com.lastIndexOf("."));
@@ -32,13 +34,21 @@ public class MemberController extends HttpServlet{
 			viewPage = "/include/message.jsp"; 
 		}
 		else if(com.equals("/MemberJoin")) {
-			viewPage += "/memberType.jsp"; 
+			viewPage += "/memberTypeCheck.jsp"; 
 		}
 		else if(com.equals("/MemberJoinPersonal")) {
 			viewPage += "/personalMemberJoin.jsp"; 
 		}
 		else if(com.equals("/MemberJoinCompany")) {
 			viewPage += "/companyMemberJoin.jsp"; 
+		}
+		else if(com.equals("/IdpasswordSearch")) {
+			viewPage += "/idpasswordSearch.jsp"; 
+		}
+		else if(com.equals("/MemberLoginCheck")) {
+			command = new MemberLoginOkCommand();
+			command.execute(request, response);
+			viewPage = "/WEB-INF/myPage/myPageMain.jsp"; 
 		}
 		else if(level > 4) {
 			

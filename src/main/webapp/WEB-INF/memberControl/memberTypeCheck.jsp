@@ -15,10 +15,10 @@
 <div class="container">
 	<div class="row">
 		<div class="col">
-	 	 <a href="MemberJoinPersonal.mem"><img src="" />개인</a>
+	 	 <a href="MemberJoinPersonal.mem"><font size="10em"><i class="bi bi-person-square"></i>개인</font></a>
 	  </div>
 		<div class="col">
-	   <a href="MemberJoinCompany.mem"><img src="" />사업자</a>
+	   <a href="MemberJoinCompany.mem"><font size="10em"><i class="bi bi-buildings-fill"></i>사업자</font></a>
 	  </div>
   </div>
 </div>

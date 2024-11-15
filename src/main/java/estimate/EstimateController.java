@@ -16,7 +16,7 @@ public class EstimateController extends HttpServlet{
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String viewPage = "/Web-INF/estimate/";
+		String viewPage = "/WEB-INF/estimate/";
 		String com = request.getRequestURI();
 		com = com.substring(com.lastIndexOf("/"), com.lastIndexOf("."));
 		

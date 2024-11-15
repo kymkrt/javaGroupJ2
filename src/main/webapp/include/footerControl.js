@@ -13,6 +13,7 @@ function copyCode() {
 };
 */
 
+//클립보드 복사 부분
 document.addEventListener('DOMContentLoaded', function() {
     const copyableElements = document.querySelectorAll('.copyable');
 

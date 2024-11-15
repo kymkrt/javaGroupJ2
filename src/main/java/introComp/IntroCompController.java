@@ -20,13 +20,13 @@ public class IntroCompController extends HttpServlet{
 		com = com.substring(com.lastIndexOf("/"), com.lastIndexOf("."));
 		
 		if(com.equals("/Represent")) {
-			viewPage += "represent.jsp";
+			viewPage += "/represent.jsp";
 		}
 		else if(com.equals("/Tech")) {
-			viewPage += "tech.jsp";
+			viewPage += "/tech.jsp";
 		}
 		else if(com.equals("/Vision")) {
-			viewPage += "vision.jsp";
+			viewPage += "/vision.jsp";
 		}
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
