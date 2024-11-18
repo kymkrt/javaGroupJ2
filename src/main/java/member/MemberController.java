@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebServlet("*.mem")
+@WebServlet("*.member")
 public class MemberController extends HttpServlet{
 	
 	@Override
@@ -29,8 +29,8 @@ public class MemberController extends HttpServlet{
 			viewPage += "/memberLogin.jsp"; 
 		}
 		else if(com.equals("/MemberLogout")) {
-			request.setAttribute("message", "로그아웃 되셨습니다");
-			request.setAttribute("url", "MainPage.mem");
+			command = new MemberLogoutCommand();
+			command.execute(request, response);
 			viewPage = "/include/message.jsp"; 
 		}
 		else if(com.equals("/MemberJoin")) {
@@ -48,11 +48,32 @@ public class MemberController extends HttpServlet{
 		else if(com.equals("/MemberLoginCheck")) {
 			command = new MemberLoginOkCommand();
 			command.execute(request, response);
-			viewPage = "/WEB-INF/myPage/myPageMain.jsp"; 
+			viewPage = "/include/message.jsp"; 
+		}
+		else if(com.equals("/NickNameAjaxCheck")) {
+			command = new NickNameAjaxCheckCommand();
+			command.execute(request, response);
+			return;
+		}
+		else if(com.equals("/MidAjaxCheck")) {
+			command = new MidAjaxCheckCommand();
+			command.execute(request, response);
+			return;
+		}
+		else if(com.equals("/MemberJoinOk")) {
+			command = new MemberJoinOkCommand();
+			command.execute(request, response);
+			viewPage = "/include/message.jsp"; 
+		}
+		else if(com.equals("/JoinCongrats")) {
+			command = new JoinCongratsCommand();
+			command.execute(request, response);
+			viewPage += "/joinCongrats.jsp"; 
 		}
 		else if(level > 4) {
-			
-			viewPage ="/include/message.jsp"; 
+			request.setAttribute("message", "회원만 이용할수 있습니다");
+			request.setAttribute("url", "/MainPage");
+			viewPage = "/include/message.jsp";
 		}
 		
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher(viewPage);

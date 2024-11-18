@@ -18,7 +18,7 @@ public class ProductController extends HttpServlet{
 		
 		ProductInterface command = null;
 		
-		String viewPage = "/Web-INF/product/";
+		String viewPage = "/WEB-INF/product/";
 		String com = request.getRequestURI();
 		com = com.substring(com.lastIndexOf("/"), com.lastIndexOf("."));
 		
@@ -27,11 +27,15 @@ public class ProductController extends HttpServlet{
 		
 		if(com.equals("/CompanyProductList")) {
 			command.execute(request, response);
-			viewPage += "product/companyProductList.jsp";
+			viewPage += "companyProductList.jsp";
 		}
 		else if(com.equals("/CustomerProductList")) {
 			command.execute(request, response);
-			viewPage += "product/customerProductList.jsp";
+			viewPage += "customerProductList.jsp";
+		}
+		else if(com.equals("/CustomerProductList")) {
+			command.execute(request, response);
+			viewPage += "customerProductList.jsp";
 		}
 		
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher(viewPage);

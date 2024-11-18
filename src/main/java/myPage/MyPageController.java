@@ -1,4 +1,4 @@
-package admin;
+package myPage;
 
 import java.io.IOException;
 
@@ -10,27 +10,27 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebServlet("*.ad")
-public class AdminController extends HttpServlet{
+@WebServlet("*.my")
+public class MyPageController extends HttpServlet{
 	
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		AdminInterface command = null;
+		MyPageInterface command = null;
 
-		String viewPage = "/WEB-INF/admin";
+		String viewPage = "/WEB-INF/myPage";
 		String com = request.getRequestURI();
 		com = com.substring(com.lastIndexOf("/"), com.lastIndexOf("."));
 		
 		HttpSession session = request.getSession();
 		int level = session.getAttribute("sLevel")==null ? 999 : (int)session.getAttribute("sLevel");
 
-		if(level != 0) {
-			request.setAttribute("message", "관리자만 사용가능합니다");
+		if(level > 4) {
+			request.setAttribute("message", "회원만 사용가능합니다");
 			request.setAttribute("url", "/MemberLogin.mem");
-			viewPage = "/include/message.jsp";
+			viewPage = "/include/message.jsp"; 
 		}
-		else if(com.equals("/AdminMain")) {
-			viewPage += "/adminMain.jsp"; 
+		else if(com.equals("/MyPageMain")) {
+			viewPage = "/myPageMain.jsp";
 		}
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);

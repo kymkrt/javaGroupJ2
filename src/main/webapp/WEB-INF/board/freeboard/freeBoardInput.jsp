@@ -5,15 +5,30 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>.jsp</title>
+  <title>freeBoardInput.jsp</title>
   <jsp:include page="/include/bs4.jsp" />
+  <script type="text/javascript">
+  	'use strict';
+  	
+  	function freeBoardInput() {
+			let title = document.getElementById("title").value;
+			
+			myform.action = "FreeDetailView.board?title="+title;
+			myform.submit();
+		}
+  </script>
 </head>
 <body>
 <jsp:include page="/include/header.jsp" />
 <jsp:include page="/include/nav.jsp" />
 <p><br /></p>
 <div class="container">
-  내페이지
+	<form name="myform" onsubmit="freeBoardInput()">
+	  <div>
+	  	<button type="submit" ></button>
+	  	<button type="button" onclick="location.href='FreeList.board'"></button>
+	  </div>
+  </form>
 </div>
 <p><br /></p>
 <jsp:include page="/include/footer.jsp" />

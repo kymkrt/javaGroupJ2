@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import admin.AdminInterface;
 
-@WebServlet("*.bo")
+@WebServlet("*.board")
 public class BoardController extends HttpServlet{
 	
 	@Override
@@ -20,7 +20,7 @@ public class BoardController extends HttpServlet{
 		
 		BoardInterface command = null;
 		
-		String viewPage = "/Web-INF/board/";
+		String viewPage = "/WEB-INF/board/";
 		String com = request.getRequestURI();
 		com = com.substring(com.lastIndexOf("/"), com.lastIndexOf("."));
 		
@@ -28,9 +28,19 @@ public class BoardController extends HttpServlet{
 		int level = session.getAttribute("sLevel")==null ? 999 : (int)session.getAttribute("sLevel");
 		
 		if(com.equals("/FreeList")) {
-			
+			command = new FreeListCommand();
 			command.execute(request, response);
 			viewPage += "freeboard/freeList.jsp"; 
+		}
+		if(com.equals("/FreeListSearch")) {
+			command = new FreeListSearchCommand();
+			command.execute(request, response);
+			viewPage += "freeboard/freeList.jsp"; 
+		}
+		if(com.equals("/FreeDetailView")) {
+			command = new FreeDetailViewCommand();
+			command.execute(request, response);
+			viewPage += "freeboard/freeDetailView.jsp"; 
 		}
 		else if(com.equals("/AnnouncementList")) {
 			
@@ -42,7 +52,12 @@ public class BoardController extends HttpServlet{
 			command.execute(request, response);
 			viewPage += "marketing/marketingList.jsp"; 
 		}
-		
+		else if (level > 5 || level < 0) {
+			
+		}
+		else if(com.equals("/FreeBoardInput")) {
+			viewPage += "freeboard/freeBoardInput.jsp"; 
+		}
 		
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher(viewPage);
 		requestDispatcher.forward(request, response);

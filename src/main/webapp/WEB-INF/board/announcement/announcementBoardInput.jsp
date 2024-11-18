@@ -13,7 +13,7 @@
 <jsp:include page="/include/nav.jsp" />
 <p><br /></p>
 <div class="container">
-  내페이지
+  
 </div>
 <p><br /></p>
 <jsp:include page="/include/footer.jsp" />

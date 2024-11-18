@@ -7,8 +7,8 @@ public class MemberVO {
 	private String pwd;
 	private String nickName;
 	private String name;
-	private int telMain;
-	private int telSub;
+	private String telMain;
+	private String telSub;
 	private String address;
 	private String email;
 	private String content;
@@ -16,9 +16,9 @@ public class MemberVO {
 	private String advertiseCheck;
 	private String userInfo;
 	private String userType;
-	private int fax;
+	private String fax;
 	private String companyName;
-	private int BSNum;
+	private String BSNum;
 	private String userDel;
 	private int level;
 	private int point;
@@ -26,6 +26,7 @@ public class MemberVO {
 	private int todayCnt;
 	private String startDate;
 	private String lastDate;
+	private String memoryMid;
 	
 	public int getIdx() {
 		return idx;
@@ -57,16 +58,16 @@ public class MemberVO {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public int getTelMain() {
+	public String getTelMain() {
 		return telMain;
 	}
-	public void setTelMain(int telMain) {
+	public void setTelMain(String telMain) {
 		this.telMain = telMain;
 	}
-	public int getTelSub() {
+	public String getTelSub() {
 		return telSub;
 	}
-	public void setTelSub(int telSub) {
+	public void setTelSub(String telSub) {
 		this.telSub = telSub;
 	}
 	public String getAddress() {
@@ -111,10 +112,10 @@ public class MemberVO {
 	public void setUserType(String userType) {
 		this.userType = userType;
 	}
-	public int getFax() {
+	public String getFax() {
 		return fax;
 	}
-	public void setFax(int fax) {
+	public void setFax(String fax) {
 		this.fax = fax;
 	}
 	public String getCompanyName() {
@@ -123,10 +124,10 @@ public class MemberVO {
 	public void setCompanyName(String companyName) {
 		this.companyName = companyName;
 	}
-	public int getBSNum() {
+	public String getBSNum() {
 		return BSNum;
 	}
-	public void setBSNum(int bSNum) {
+	public void setBSNum(String bSNum) {
 		BSNum = bSNum;
 	}
 	public String getUserDel() {
@@ -171,6 +172,12 @@ public class MemberVO {
 	public void setLastDate(String lastDate) {
 		this.lastDate = lastDate;
 	}
+	public String getMemoryMid() {
+		return memoryMid;
+	}
+	public void setMemoryMid(String memoryMid) {
+		this.memoryMid = memoryMid;
+	}
 	
 	@Override
 	public String toString() {
@@ -179,7 +186,7 @@ public class MemberVO {
 				+ content + ", photo=" + photo + ", advertiseCheck=" + advertiseCheck + ", userInfo=" + userInfo + ", userType="
 				+ userType + ", fax=" + fax + ", companyName=" + companyName + ", BSNum=" + BSNum + ", userDel=" + userDel
 				+ ", level=" + level + ", point=" + point + ", visitCnt=" + visitCnt + ", todayCnt=" + todayCnt + ", startDate="
-				+ startDate + ", lastDate=" + lastDate + "]";
+				+ startDate + ", lastDate=" + lastDate + ", memoryMid=" + memoryMid + "]";
 	}
 	
 }

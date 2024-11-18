@@ -14,7 +14,7 @@
   </script>
   <style type="text/css">
   	.box{
-	    width: 200px;
+	    width: 400px;
 	    background-color: #eee;
 	    margin-left: 10px;
 	    padding: 20px;
@@ -30,16 +30,24 @@
 <jsp:include page="/include/nav.jsp" />
 <p><br /></p>
 <div class="container box">
-  <form name="loginForm" action="">
+  <form name="loginForm" action="MemberLoginCheck.member">
   	<div class="display-6 mb-3">로그인</div>
   	<div class="mb-2">아이디</div>
-  	<input type="text" class="form-control mb-3" />
+  	<input type="text" name="mid" class="form-control mb-3" />
   	<div class="mb-2">비밀번호</div>
-  	<input type="password" class="form-control mb-3"  />
-	  <button type="submit" class="btn btn-success">로그인</button>
-	  <a href="MemberJoin.mem" class="btn btn-info">회원 가입</a>
-	  <button type="reset" class="btn btn-warning mb-3">다시 작성</button><br/>
-	  <button type="button" onclick="location.href='IdpasswordSearch.mem'" class="btn btn-primary btn-sm">아이디/비밀번호찾기</button>
+  	<input type="password" name="pwd" class="form-control mb-3"  />
+  	<div class="row">
+	  	<div class="col">
+			  <button type="submit" class="btn btn-success">로그인</button>
+	  	</div>
+	  	<div class="col">
+		  	<a href="MemberJoin.member" class="btn btn-info">회원 가입</a>
+		  </div>
+		  <div class="col">
+		  	<button type="reset" class="btn btn-warning mb-3">다시 작성</button><br/>
+		  </div>
+	  </div>
+	  <button type="button" onclick="location.href='IdpasswordSearch.member'" class="btn btn-primary btn-sm">아이디/비밀번호찾기</button>
   </form>
 </div>
 <p><br /></p>
