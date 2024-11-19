@@ -32,31 +32,109 @@ public class BoardController extends HttpServlet{
 			command.execute(request, response);
 			viewPage += "freeboard/freeList.jsp"; 
 		}
-		if(com.equals("/FreeListSearch")) {
+		else if(com.equals("/FreeListSearch")) {
 			command = new FreeListSearchCommand();
 			command.execute(request, response);
 			viewPage += "freeboard/freeList.jsp"; 
 		}
-		if(com.equals("/FreeDetailView")) {
+		else if(com.equals("/FreeDetailView")) {
 			command = new FreeDetailViewCommand();
 			command.execute(request, response);
 			viewPage += "freeboard/freeDetailView.jsp"; 
 		}
 		else if(com.equals("/AnnouncementList")) {
-			
+			command = new AnnouncementListCommand();
 			command.execute(request, response);
 			viewPage += "announcement/announcementList.jsp"; 
 		}
+		else if(com.equals("/AnnouncementSearch")) {
+			command = new AnnouncementSearchCommand();
+			command.execute(request, response);
+			viewPage += "announcement/announcementList.jsp"; 
+		}
+		else if(com.equals("/AnnouncementDetailView")) {
+			command = new AnnouncementDetailViewCommand();
+			command.execute(request, response);
+			viewPage += "announcement/announcementDetailView.jsp"; 
+		}
 		else if(com.equals("/MarketingList")) {
-			
+			command = new MarketingListCommand();
 			command.execute(request, response);
 			viewPage += "marketing/marketingList.jsp"; 
 		}
+		else if(com.equals("/MarketingListSearch")) {
+			command = new MarketingListSearchsCommand();
+			command.execute(request, response);
+			viewPage += "marketing/marketingList.jsp"; 
+		}
+		else if(com.equals("/MarketingDetailView")) {
+			command = new MarketingDetailViewCommand();
+			command.execute(request, response);
+			viewPage += "marketing/marketingDetailView.jsp"; 
+		}
 		else if (level > 5 || level < 0) {
-			
+		 request.setAttribute("message", "로그인 후 사용하세요");
+		 request.setAttribute("url", "/MemberLogin.member");
+		 viewPage ="/include/message.jsp"; 
 		}
 		else if(com.equals("/FreeBoardInput")) {
 			viewPage += "freeboard/freeBoardInput.jsp"; 
+		}
+		else if(com.equals("/FreeBoardInputOk")) {
+			command = new FreeBoardInputOkCommand();
+			command.execute(request, response);
+			viewPage ="/include/message.jsp"; 
+		}
+		else if(com.equals("/FreeBoardUpdate")) {
+			command = new FreeBoardUpdateCommand();
+			command.execute(request, response);
+			viewPage ="/include/message.jsp"; 
+		}
+		else if(com.equals("/FreeBoardDelete")) {
+			command = new FreeBoardDeleteCommand();
+			command.execute(request, response);
+			viewPage ="/include/message.jsp"; 
+		}
+		else if(com.equals("/MarketingInput")) {
+			viewPage += "marketing/marketingBoardInput.jsp"; 
+		}
+		else if(com.equals("/MarketingInputOk")) {
+			command = new MarketingInputOkCommand();
+			command.execute(request, response);
+			viewPage ="/include/message.jsp"; 
+		}
+		else if(com.equals("/MarketingUpdate")) {
+			command = new MarketingUpdateCommand();
+			command.execute(request, response);
+			viewPage ="/include/message.jsp"; 
+		}
+		else if(com.equals("/MarketingDelete")) {
+			command = new MarketingDeleteCommand();
+			command.execute(request, response);
+			viewPage ="/include/message.jsp"; 
+		}
+		else if (level != 0) {
+			 request.setAttribute("message", "관리자만 사용할수 있습니다");
+			 request.setAttribute("url", "/MyPageMain.my");
+			 viewPage ="/include/message.jsp"; 
+			}
+		else if(com.equals("/AnnouncementInput")) {
+			viewPage += "announcement/announcementBoardInput.jsp"; 
+		}
+		else if(com.equals("/AnnouncementInputOk")) {
+			command = new AnnouncementInputOkCommand();
+			command.execute(request, response);
+			viewPage ="/include/message.jsp"; 
+		}
+		else if(com.equals("/AnnouncementUpdate")) {
+			command = new AnnouncementUpdateCommand();
+			command.execute(request, response);
+			viewPage ="/include/message.jsp"; 
+		}
+		else if(com.equals("/AnnouncementDelete")) {
+			command = new AnnouncementDeleteCommand();
+			command.execute(request, response);
+			viewPage ="/include/message.jsp"; 
 		}
 		
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher(viewPage);

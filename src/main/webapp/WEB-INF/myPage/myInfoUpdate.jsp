@@ -5,10 +5,11 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>tech.jsp</title>
+  <title>memberInfoUpdate.jsp</title>
   <jsp:include page="/include/bs4.jsp" />
 </head>
 <body>
+<jsp:include page="/include/header.jsp" />
 <jsp:include page="/include/nav.jsp" />
 <p><br /></p>
 <div class="container">

@@ -30,10 +30,25 @@
   	const regexNickName = /^[a-zA-Z가-힣0-9_]{3,10}$/;
   	const regexPwd = /^[a-zA-Z0-9_]{4,20}$/;
   	const regexEmail = /^[a-zA-Z0-9]{2,15}\@{1}[a-z]{2,10}\.{1}[a-z]{2,10}$/; 
+  	const regexPwdCheckQ = /^[가-힣a-zA-Z0-9]{1,50}$/;
   	
   	function formCheck() {
   		let pwd = myform.pwd.value;
   		let email = myform.email.value;
+  		let pwdCheckAsk = myform.pwdCheckAsk.value;
+  		let pwdCheckAns = myform.pwdCheckAns.value;
+  		let pwdCheckQ = pwdCheckAsk+pwdCheckAns;
+  		
+  		let postCode = document.getElementById("sample4_postcode").value;
+  		let roadAddress = document.getElementById("sample4_roadAddress").value;
+  		let jibunAddress = document.getElementById("sample4_jibunAddress").value;
+  		let detailAddress = document.getElementById("sample4_detailAddress").value;
+  		let extraAddress = document.getElementById("sample4_extraAddress").value;
+  		
+  		let address = postCode+"/"+roadAddress+"/"+jibunAddress+"/"+detailAddress+"/"+extraAddress;
+  		
+  		myform.address.value = address;
+  		myform.pwdCheckQ.value = pwdCheckQ;
   		
 			if(swId == 0){
 				alert("아이디 체크를 하십시요");
@@ -48,9 +63,18 @@
 				return false;
 			}
 			else if(!regexEmail.test(email.trim())){
-				alert("비밀번호 형식을 체크 하십시요");
+				alert("이메일 형식을 체크 하십시요");
 				return false;
 			}
+			else if(detailAddress.trim() == ""){
+				alert("상세주소를 적어주십시요");
+				return false;
+			}
+			else if(!regexPwdCheckQ.test(pwdCheckAns.trim()) || pwdCheckAns.trim()==""){
+				alert("비밀번호 찾기 질문란의 형식을 확인해주세요");
+				return false;
+			}
+			
   		myform.action = "MemberJoinOk.member";
   		myform.submit();
 		}
@@ -110,6 +134,62 @@
   	        swNick = 0;
   	    });
   	});
+  	
+  //다음 주소 찾기
+    function sample4_execDaumPostcode() {
+        new daum.Postcode({
+            oncomplete: function(data) {
+                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+                // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
+                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                var roadAddr = data.roadAddress; // 도로명 주소 변수
+                var extraRoadAddr = ''; // 참고 항목 변수
+
+                // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                    extraRoadAddr += data.bname;
+                }
+                // 건물명이 있고, 공동주택일 경우 추가한다.
+                if(data.buildingName !== '' && data.apartment === 'Y'){
+                   extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                }
+                // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                if(extraRoadAddr !== ''){
+                    extraRoadAddr = ' (' + extraRoadAddr + ')';
+                }
+
+                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                document.getElementById('sample4_postcode').value = data.zonecode;
+                document.getElementById("sample4_roadAddress").value = roadAddr;
+                document.getElementById("sample4_jibunAddress").value = data.jibunAddress;
+                
+                // 참고항목 문자열이 있을 경우 해당 필드에 넣는다.
+                if(roadAddr !== ''){
+                    document.getElementById("sample4_extraAddress").value = extraRoadAddr;
+                } else {
+                    document.getElementById("sample4_extraAddress").value = '';
+                }
+
+                var guideTextBox = document.getElementById("guide");
+                // 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
+                if(data.autoRoadAddress) {
+                    var expRoadAddr = data.autoRoadAddress + extraRoadAddr;
+                    guideTextBox.innerHTML = '(예상 도로명 주소 : ' + expRoadAddr + ')';
+                    guideTextBox.style.display = 'block';
+
+                } else if(data.autoJibunAddress) {
+                    var expJibunAddr = data.autoJibunAddress;
+                    guideTextBox.innerHTML = '(예상 지번 주소 : ' + expJibunAddr + ')';
+                    guideTextBox.style.display = 'block';
+                } else {
+                    guideTextBox.innerHTML = '';
+                    guideTextBox.style.display = 'none';
+                }
+            }
+        }).open();
+    }
   </script>
 </head>
 <body>
@@ -144,7 +224,26 @@
 						placeholder="영문 및 숫자 _!@#$%기호 최소4자 최대 20자" class="form-control" required 
 					/>
 				</div>	
-			</div>	
+			</div>
+			<div class="row mb-4 pwd">
+				<div class="col-4">
+					비밀번호 찾기 질문
+				</div>
+				<div class="col-4">
+					<select name="pwdCheckAsk" class="form-control">
+						<option>가장 소중한것은?</option>
+						<option>가장 좋아하는 음식은?</option>
+						<option>가장 가고 싶은곳은?</option>
+						<option>가장 추억이 많은 장소는?</option>
+					</select>
+				</div>
+				<div class="col-4">
+					<input 
+						type="text" name="pwdCheckAns" id="pwdCheckAns"
+						placeholder="한글 및 영문, 숫자 최소1자 최대 50자" class="form-control" required 
+					/>
+				</div>	
+			</div>		
 			<div class="row mb-4 name">
 				<div class="col-4">
 					성명
@@ -213,8 +312,32 @@
 					주소
 				</div>
 				<div class="col-8">
-					<input type="text" name="address" class="form-control" required />
-				</div>	
+					<div class="row mb-1">
+						<div class="col-8">
+							<input type="text" id="sample4_postcode" placeholder="우편번호" class="form-control" readonly />
+						</div>
+						<div class="col-4">
+							<input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기" class="form-control btn-secondary" />
+						</div>
+					</div>	
+					<div class="row mb-1">
+						<div class="col">
+							<input type="text" id="sample4_roadAddress" placeholder="도로명주소" class="form-control" readonly />
+						</div>
+						<div class="col">
+							<input type="text" id="sample4_jibunAddress" placeholder="지번주소" class="form-control" readonly />
+						</div>
+					</div>	
+					<div class="row mb-1">
+						<div class="col-8">
+							<input type="text" id="sample4_detailAddress" placeholder="상세주소" class="form-control" />
+						</div>
+						<div class="col-4">
+							<input type="text" id="sample4_extraAddress" placeholder="참고항목" class="form-control" readonly />
+						</div>
+					</div>	
+					<span id="guide" style="color:#999;display:none"></span>
+				</div>
 			</div>
 			<div class="row mb-4">
 				<div class="col-4">
@@ -270,11 +393,13 @@
 					<button type="reset" class="btn btn-warning">다시작성</button>
 				</div>
 				<div class="col-4">
-					<button type="button" onclick="location.href='MemberJoin.mem'" class="btn btn-secondary">돌아가기</button>
+					<button type="button" onclick="location.href='MemberJoin.member'" class="btn btn-secondary">돌아가기</button>
 				</div>
 			</div>
 	  </div>
 	  <input type="hidden" name="userType" id="userType" value="사업자">
+	  <input type="hidden" name="address" id="address" value="">
+	  <input type="hidden" name="pwdCheckQ" id="pwdCheckQ" value="">
   </form>
 </div>
 <p><br /></p>

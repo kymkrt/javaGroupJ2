@@ -31,7 +31,6 @@ public class MemberLoginOkCommand implements MemberInterface {
 		
 		if(vo.getMid() == null) {
 			request.setAttribute("message", "회원정보가 없습니다 \\n 확인하고 다시 로그인해주세요");
-			request.setAttribute("message", "회원정보가 없습니다 \\n 확인하고 다시 로그인해주세요");
 			request.setAttribute("url", "MemberLogin.member");
 		}
 		else if(vo.getMid() != null && vo.getMid().equals("admin")) {

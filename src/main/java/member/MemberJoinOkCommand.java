@@ -26,6 +26,8 @@ public class MemberJoinOkCommand implements MemberInterface {
 		String photo = request.getParameter("photo")==null ? "" : request.getParameter("photo");
 		String advertiseCheck = request.getParameter("advertiseCheck")==null ? "" : request.getParameter("advertiseCheck");
 		String fax = request.getParameter("fax")==null ? "0" : request.getParameter("fax");
+		String pwdCheckQ = request.getParameter("pwdCheckQ")==null ? "" : request.getParameter("pwdCheckQ");
+		
 		
 		MemberVO vo  = new MemberVO();
 		
@@ -57,6 +59,7 @@ public class MemberJoinOkCommand implements MemberInterface {
 		vo.setPhoto(photo);
 		vo.setAdvertiseCheck(advertiseCheck);
 		vo.setFax(fax);
+		vo.setPwdCheckQ(pwdCheckQ);
 		
 		MemberDAO dao = new MemberDAO();
 		int res = dao.setMemberJoinOk(vo);

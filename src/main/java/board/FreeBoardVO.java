@@ -14,85 +14,91 @@ public class FreeBoardVO {
 	private String wDate;
 	private String claim;
 	private String file;
+	private int good;
 	
-	int getIdx() {
+	public int getIdx() {
 		return idx;
 	}
-	void setIdx(int idx) {
+	public void setIdx(int idx) {
 		this.idx = idx;
 	}
-	String getMid() {
+	public String getMid() {
 		return mid;
 	}
-	void setMid(String mid) {
+	public void setMid(String mid) {
 		this.mid = mid;
 	}
-	String getNickName() {
+	public String getNickName() {
 		return nickName;
 	}
-	void setNickName(String nickName) {
+	public void setNickName(String nickName) {
 		this.nickName = nickName;
 	}
-	String getTitle() {
+	public String getTitle() {
 		return title;
 	}
-	void setTitle(String title) {
+	public void setTitle(String title) {
 		this.title = title;
 	}
-	String getPart() {
+	public String getPart() {
 		return part;
 	}
-	void setPart(String part) {
+	public void setPart(String part) {
 		this.part = part;
 	}
-	String getContent() {
+	public String getContent() {
 		return content;
 	}
-	void setContent(String content) {
+	public void setContent(String content) {
 		this.content = content;
 	}
-	String getHostIp() {
+	public String getHostIp() {
 		return hostIp;
 	}
-	void setHostIp(String hostIp) {
+	public void setHostIp(String hostIp) {
 		this.hostIp = hostIp;
 	}
-	String getOpenSw() {
+	public String getOpenSw() {
 		return openSw;
 	}
-	void setOpenSw(String openSw) {
+	public void setOpenSw(String openSw) {
 		this.openSw = openSw;
 	}
-	int getViewCnt() {
+	public int getViewCnt() {
 		return viewCnt;
 	}
-	void setViewCnt(int viewCnt) {
+	public void setViewCnt(int viewCnt) {
 		this.viewCnt = viewCnt;
 	}
-	String getwDate() {
+	public String getwDate() {
 		return wDate;
 	}
-	void setwDate(String wDate) {
+	public void setwDate(String wDate) {
 		this.wDate = wDate;
 	}
-	String getClaim() {
+	public String getClaim() {
 		return claim;
 	}
-	void setClaim(String claim) {
+	public void setClaim(String claim) {
 		this.claim = claim;
 	}
-	String getFile() {
+	public String getFile() {
 		return file;
 	}
-	void setFile(String file) {
+	public void setFile(String file) {
 		this.file = file;
+	}
+	public int getGood() {
+		return good;
+	}
+	public void setGood(int good) {
+		this.good = good;
 	}
 	
 	@Override
 	public String toString() {
 		return "FreeBoardVO [idx=" + idx + ", mid=" + mid + ", nickName=" + nickName + ", title=" + title + ", part=" + part
 				+ ", content=" + content + ", hostIp=" + hostIp + ", openSw=" + openSw + ", viewCnt=" + viewCnt + ", wDate="
-				+ wDate + ", claim=" + claim + ", file=" + file + "]";
+				+ wDate + ", claim=" + claim + ", file=" + file + ", good=" + good + "]";
 	}
-	
 }

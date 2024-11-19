@@ -1,23 +1,26 @@
-package board;
+package myPage;
 
 import java.io.IOException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import member.MemberDAO;
+import member.MemberInterface;
 import member.MemberVO;
 
-public class FreeDetailViewCommand implements BoardInterface {
+public class MyInfoUpdateCommand implements MemberInterface, MyPageInterface {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int idx = (request.getParameter("idx")==null) || (request.getParameter("idx").equals("")) ? 0 : Integer.parseInt(request.getParameter("idx"));
-		BoardDAO dao = new BoardDAO();
+		HttpSession session = request.getSession();
+		String mid = (String) session.getAttribute("sMid");
 		
-		FreeBoardVO vo = dao.getFreeDetailView(idx);
+		MemberDAO dao = new MemberDAO();
+		MemberVO vo = dao.getMemberInfo(mid);
 		
 		request.setAttribute("vo", vo);
 	}

@@ -1,58 +1,70 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-#mySidenav a {
-  position: absolute;
-  right: -80px;
-  transition: 0.3s;
-  padding: 15px;
-  width: 100px;
-  text-decoration: none;
-  font-size: 20px;
-  color: white;
-  border-radius: 0 5px 5px 0;
-}
+  <meta charset="UTF-8">
+  <title>Admin Layout</title>
+  <style>
+    body {
+      display: flex;
+      margin: 0;
+      height: 100vh;
+    }
 
-#mySidenav a:hover {
-  right: 0;
-}
+    .sidebar {
+      width: 130px;
+      background-color: #f8f9fa;
+      overflow-y: auto;
+      border-right: 1px solid #ddd;
+    }
 
-#about {
-  top: 20px;
-  background-color: #04AA6D;
-}
+    .content {
+      flex: 1;
+      padding: 20px;
+      overflow-y: auto;
+    }
 
-#blog {
-  top: 80px;
-  background-color: #2196F3;
-}
+    .sidebar a {
+      display: block;
+      padding: 10px;
+      text-decoration: none;
+      color: #333;
+    }
 
-#projects {
-  top: 140px;
-  background-color: #f44336;
-}
+    .sidebar a:hover {
+      background-color: #e9ecef;
+    }
+  </style>
+   <script>
+   document.addEventListener('DOMContentLoaded', function() {
+    function loadContent(event) {
+      event.preventDefault(); // 링크 기본 동작 막기
+      const url = event.target.getAttribute('href'); // 클릭한 링크의 href 가져오기
 
-#contact {
-  top: 200px;
-  background-color: #555
-}
-</style>
+      fetch(url)
+        .then(response => response.text())
+        .then(html => {
+          document.getElementById('content').innerHTML = html; // 콘텐츠 로드
+        })
+        .catch(error => console.error('Error loading content:', error));
+    }
+   }
+  </script>
 </head>
 <body>
+  <div class="sidebar">
+    <h3>관리자 메뉴</h3>
+    <ul>
+      <li><a href="IdpasswordSearch.member" onclick="loadContent(event)">대시보드</a></li>
+      <li><a href="MemberJoinCompany.member" onclick="loadContent(event)">사용자 관리</a></li>
+      <li><a href="MemberLogin.member" onclick="loadContent(event)">설정</a></li>
+    </ul>
+  </div>
+  <div class="content" id="content">
+    <!-- 기본 콘텐츠 로드 -->
+    <h2>대시보드</h2>
+    <p>여기는 기본 화면입니다.</p>
+  </div>
 
-<div id="mySidenav" class="sidenav">
-  <a href="#" id="about">About</a>
-  <a href="#" id="blog">Blog</a>
-  <a href="#" id="projects">Projects</a>
-  <a href="#" id="contact">Contact</a>
-</div>
-
-<div style="margin-left:80px;">
-  <h2>Hoverable Sidenav Buttons</h2>
-  <p>Hover over the buttons in the left side navigation to open them.</p>
-</div>
-   
+ 
 </body>
-</html> 
+</html>

@@ -20,7 +20,7 @@
   <br/>
   <div class="row text-center">
   	<div class="col">
-  		<button type="button" onclick="location.href='MyPageMain.my'" class="btn btn-info">마이페이지</button>
+  		<button type="button" onclick="location.href='MemberLogin.member'" class="btn btn-info">로그인하기</button>
   	</div>
   	<div class="col">
   		<button type="button" onclick="location.href='CompanyProductList.pro'" class="btn btn-success">상품둘러보기</button>

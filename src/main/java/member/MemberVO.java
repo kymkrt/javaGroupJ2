@@ -16,6 +16,7 @@ public class MemberVO {
 	private String advertiseCheck;
 	private String userInfo;
 	private String userType;
+	private String pwdCheckQ;
 	private String fax;
 	private String companyName;
 	private String BSNum;
@@ -178,15 +179,21 @@ public class MemberVO {
 	public void setMemoryMid(String memoryMid) {
 		this.memoryMid = memoryMid;
 	}
+	public String getPwdCheckQ() {
+		return pwdCheckQ;
+	}
+	public void setPwdCheckQ(String pwdCheckQ) {
+		this.pwdCheckQ = pwdCheckQ;
+	}
 	
 	@Override
 	public String toString() {
 		return "MemberVO [idx=" + idx + ", mid=" + mid + ", pwd=" + pwd + ", nickName=" + nickName + ", name=" + name
 				+ ", telMain=" + telMain + ", telSub=" + telSub + ", address=" + address + ", email=" + email + ", content="
 				+ content + ", photo=" + photo + ", advertiseCheck=" + advertiseCheck + ", userInfo=" + userInfo + ", userType="
-				+ userType + ", fax=" + fax + ", companyName=" + companyName + ", BSNum=" + BSNum + ", userDel=" + userDel
-				+ ", level=" + level + ", point=" + point + ", visitCnt=" + visitCnt + ", todayCnt=" + todayCnt + ", startDate="
-				+ startDate + ", lastDate=" + lastDate + ", memoryMid=" + memoryMid + "]";
+				+ userType + ", pwdCheckQ=" + pwdCheckQ + ", fax=" + fax + ", companyName=" + companyName + ", BSNum=" + BSNum
+				+ ", userDel=" + userDel + ", level=" + level + ", point=" + point + ", visitCnt=" + visitCnt + ", todayCnt="
+				+ todayCnt + ", startDate=" + startDate + ", lastDate=" + lastDate + ", memoryMid=" + memoryMid + "]";
 	}
 	
 }

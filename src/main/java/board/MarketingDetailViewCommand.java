@@ -6,18 +6,15 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import member.MemberDAO;
-import member.MemberVO;
-
-public class FreeDetailViewCommand implements BoardInterface {
+public class MarketingDetailViewCommand implements BoardInterface {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
 		int idx = (request.getParameter("idx")==null) || (request.getParameter("idx").equals("")) ? 0 : Integer.parseInt(request.getParameter("idx"));
 		BoardDAO dao = new BoardDAO();
 		
-		FreeBoardVO vo = dao.getFreeDetailView(idx);
+		MarketingBoardVO vo = dao.getMarketingDetailView(idx);
 		
 		request.setAttribute("vo", vo);
 	}

@@ -8,7 +8,7 @@ public class GetConn {
 	private static Connection conn = null; //얘가 있어야 아래 드라이버매니저 사용가능
 	
 	private String driver = "com.mysql.jdbc.Driver"; //드라이버는 클래스명이라 첫글자가 대문자
-	private String url = "jdbc:mysql://localhost:3306/javagroup"; 
+	private String url = "jdbc:mysql://localhost:3306/javagroup2"; 
 	private String user = "root";
 	private String password = "1234";
 	

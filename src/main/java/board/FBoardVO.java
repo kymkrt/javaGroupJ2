@@ -1,14 +1,17 @@
 package board;
 
-public class AnnoBoardVO {
-
+public class FBoardVO {
 	private int idx;
 	private String mid;
 	private String nickName;
 	private String title;
+	private String part;
 	private String content;
+	private String hostIp;
+	private String openSw;
 	private int viewCnt;
 	private String wDate;
+	private String claim;
 	private String file;
 	
 	int getIdx() {
@@ -35,11 +38,29 @@ public class AnnoBoardVO {
 	void setTitle(String title) {
 		this.title = title;
 	}
+	String getPart() {
+		return part;
+	}
+	void setPart(String part) {
+		this.part = part;
+	}
 	String getContent() {
 		return content;
 	}
 	void setContent(String content) {
 		this.content = content;
+	}
+	String getHostIp() {
+		return hostIp;
+	}
+	void setHostIp(String hostIp) {
+		this.hostIp = hostIp;
+	}
+	String getOpenSw() {
+		return openSw;
+	}
+	void setOpenSw(String openSw) {
+		this.openSw = openSw;
 	}
 	int getViewCnt() {
 		return viewCnt;
@@ -53,6 +74,12 @@ public class AnnoBoardVO {
 	void setwDate(String wDate) {
 		this.wDate = wDate;
 	}
+	String getClaim() {
+		return claim;
+	}
+	void setClaim(String claim) {
+		this.claim = claim;
+	}
 	String getFile() {
 		return file;
 	}
@@ -62,8 +89,8 @@ public class AnnoBoardVO {
 	
 	@Override
 	public String toString() {
-		return "AnnoBoardVO [idx=" + idx + ", mid=" + mid + ", nickName=" + nickName + ", title=" + title + ", content="
-				+ content + ", viewCnt=" + viewCnt + ", wDate=" + wDate + ", file=" + file + "]";
+		return "FreeBoardVO [idx=" + idx + ", mid=" + mid + ", nickName=" + nickName + ", title=" + title + ", part=" + part
+				+ ", content=" + content + ", hostIp=" + hostIp + ", openSw=" + openSw + ", viewCnt=" + viewCnt + ", wDate="
+				+ wDate + ", claim=" + claim + ", file=" + file + "]";
 	}
-	
 }

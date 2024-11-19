@@ -25,6 +25,7 @@ create table member (
 	advertiseCheck char(2) not null default 'O', /*광고 동의 여부*/
 	userInfo char(3) default '공개', /*회원의 정보 공개 유무(공개/비공개) 고정길이 실무에선 ok/no같은 방식 많이 씀*/
 	userType char(6) not null default '개인',/*사업자 개인 선택 리드온리 처리*/
+	pwdCheckQ varchar(100) not null, /*비밀번호 찾기 질문*/
 	/*사업자일시 추가 부분*/
 	fax varchar(15) default '0',  /*팩스번호 : 010-1234-5678 */
 	companyName varchar(100), /*회사명 사업자 일때만*/

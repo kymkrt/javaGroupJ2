@@ -45,9 +45,9 @@
         회사소개
       </a>
       <div class="dropdown-menu">
-        <a class="dropdown-item" href="#">기술</a>
-        <a class="dropdown-item" href="#">비전</a>
-        <a class="dropdown-item" href="#">Link 3</a>
+        <a class="dropdown-item" href="Represent.intro">대표</a>
+        <a class="dropdown-item" href="Tech.intro">기술</a>
+        <a class="dropdown-item" href="Vision.intro">주요상품</a>
       </div>
     </li>
     <li class="nav-item active">

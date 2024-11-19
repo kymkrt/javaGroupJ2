@@ -38,7 +38,7 @@ public class MemberDAO {
 		MemberVO vo = new MemberVO();
 		try { 
 			int sw = 0;
-			sql = "select * from javagroup2.member where mid = ? and pwd = ? and userDel != 'Ok'";
+			sql = "select * from member where mid = ? and pwd = ? and userDel != 'Ok'";
 			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, mid);
@@ -59,6 +59,7 @@ public class MemberDAO {
 				vo.setAdvertiseCheck(rs.getString("advertiseCheck"));
 				vo.setUserInfo(rs.getString("userInfo"));
 				vo.setUserType(rs.getString("userType"));
+				vo.setPwdCheckQ(rs.getString("pwdCheckQ"));
 				//사업자일시 추가 부분
 				vo.setFax(rs.getString("fax"));
 				vo.setCompanyName(rs.getString("companyName"));
@@ -85,7 +86,7 @@ public class MemberDAO {
 	public void setCntPlus(String mid) {
 		try {
 			if(true) {
-				sql="update javagroup2.member set visitCnt=visitCnt+1, todayCnt=todayCnt+1 where mid =? ";
+				sql="update member set visitCnt=visitCnt+1, todayCnt=todayCnt+1 where mid =? ";
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setString(1, mid);
 				int res = pstmt.executeUpdate();
@@ -103,7 +104,7 @@ public class MemberDAO {
 	public void setDateUpdate(String mid) {
 		try {
 			if(true) {
-				sql="update javagroup2.member set lastDate=now() where mid = ? ";
+				sql="update member set lastDate=now() where mid = ? ";
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setString(1, mid);
 				int res = pstmt.executeUpdate();
@@ -220,7 +221,7 @@ public class MemberDAO {
 		int res = 0;
 		try {
 			if(vo.getUserType().trim().equals("개인")) {
-				sql = "insert into javagroup2.member values(default,?,?,?,?,?,?,?,?,?,?,?,?,'개인',?,default,default,"
+				sql = "insert into javagroup2.member values(default,?,?,?,?,?,?,?,?,?,?,?,?,'개인',?,?,default,default,"
 						+ "default,1,default,default,default,default,default,?)";
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setString(1, vo.getMid());
@@ -235,11 +236,12 @@ public class MemberDAO {
 				pstmt.setString(10, vo.getPhoto());
 				pstmt.setString(11, vo.getAdvertiseCheck());
 				pstmt.setString(12, vo.getUserInfo());
-				pstmt.setString(13, vo.getFax());
-				pstmt.setString(14, vo.getMemoryMid());
+				pstmt.setString(13, vo.getPwdCheckQ());
+				pstmt.setString(14, vo.getFax());
+				pstmt.setString(15, vo.getMemoryMid());
 			}
 			else if(vo.getUserType().trim().equals("사업자")) {
-				sql = "insert into javagroup2.member values(default,?,?,?,?,?,?,?,?,?,?,?,?,'사업자',?,?,?,"
+				sql = "insert into javagroup2.member values(default,?,?,?,?,?,?,?,?,?,?,?,?,'사업자',?,?,?,?,"
 						+ "default,2,default,default,default,default,default,?)";
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setString(1, vo.getMid());
@@ -254,10 +256,11 @@ public class MemberDAO {
 				pstmt.setString(10, vo.getPhoto());
 				pstmt.setString(11, vo.getAdvertiseCheck());
 				pstmt.setString(12, vo.getUserInfo());
-				pstmt.setString(13, vo.getFax());
-				pstmt.setString(14, vo.getCompanyName());
-				pstmt.setString(15, vo.getBSNum());
-				pstmt.setString(16, vo.getMemoryMid());
+				pstmt.setString(13, vo.getPwdCheckQ());
+				pstmt.setString(14, vo.getFax());
+				pstmt.setString(15, vo.getCompanyName());
+				pstmt.setString(16, vo.getBSNum());
+				pstmt.setString(17, vo.getMemoryMid());
 				
 			}
 			
@@ -268,6 +271,86 @@ public class MemberDAO {
 		}finally {
 			pstmtClose();
 		}
+		return res;
+	}
+	
+	//아이디 비번 찾기
+	public int getIdPwdSearch(String email, String telMain, String mid) {
+		int res = 0;
+		try {
+			if(mid.equals("")) {
+				sql = "";
+				pstmt = conn.prepareStatement(sql);
+				
+			}
+			else {
+				sql = "";
+				pstmt = conn.prepareStatement(sql);
+			}
+			
+			
+		} catch (SQLException e) {
+			System.out.println("sql오류(getIdPwdSearch) : "+e.getMessage());
+		}finally {
+			rsClose();
+		}
+		
+		return res;
+	}
+
+	//내 개인정보 가져오기
+	public MemberVO getMemberInfo(String mid) {
+		MemberVO vo = new MemberVO();
+		try {
+			sql="select * from member where mid = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, mid);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				vo.setIdx(rs.getInt("idx"));
+				vo.setMid(rs.getString("mid"));
+				vo.setPwd(rs.getString("pwd"));
+				vo.setNickName(rs.getString("nickName"));
+				vo.setName(rs.getString("name"));
+				vo.setTelMain(rs.getString("telMain"));
+				vo.setTelSub(rs.getString("telSub"));
+				vo.setAddress(rs.getString("address"));
+				vo.setEmail(rs.getString("email"));
+				vo.setContent(rs.getString("content"));
+				vo.setPhoto(rs.getString("photo"));
+				vo.setAdvertiseCheck(rs.getString("advertiseCheck"));
+				vo.setUserInfo(rs.getString("userInfo"));
+				vo.setUserType(rs.getString("userType"));
+				//사업자일시 추가 부분
+				vo.setFax(rs.getString("fax"));
+				vo.setCompanyName(rs.getString("companyName"));
+				vo.setBSNum(rs.getString("BSNum"));
+				//관리자 처리 부분
+				vo.setUserDel(rs.getString("userDel"));
+				vo.setLevel(rs.getInt("level"));
+				vo.setPoint(rs.getInt("point"));
+				vo.setVisitCnt(rs.getInt("visitCnt"));
+				vo.setTodayCnt(rs.getInt("todayCnt"));
+				vo.setStartDate(rs.getString("startDate"));
+				vo.setLastDate(rs.getString("lastDate"));
+				vo.setMemoryMid(rs.getString("memoryMid"));
+				
+				vo.setPwdCheckQ(rs.getString("pwdCheckQ"));
+			}
+		} catch (SQLException e) {
+			System.out.println("sql오류(getMemberInfo) : "+e.getMessage());
+		}finally {
+			rsClose();
+		}
+		return vo;
+	}
+
+	//회원 정보 수정
+	public int setMemberUpdateOk(String mid) {
+		int res = 0;
+		
+		
 		return res;
 	}
 	

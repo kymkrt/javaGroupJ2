@@ -14,7 +14,7 @@
   </script>
   <style type="text/css">
   	.box{
-	    width: 400px;
+	    width: 600px;
 	    background-color: #eee;
 	    margin-left: 10px;
 	    padding: 20px;
@@ -31,7 +31,7 @@
 <p><br /></p>
 <div class="container box">
   <form name="loginForm" action="MemberLoginCheck.member">
-  	<div class="display-6 mb-3">로그인</div>
+  	<h3 class="display-6 mb-3">로그인</h3>
   	<div class="mb-2">아이디</div>
   	<input type="text" name="mid" class="form-control mb-3" />
   	<div class="mb-2">비밀번호</div>
@@ -45,6 +45,9 @@
 		  </div>
 		  <div class="col">
 		  	<button type="reset" class="btn btn-warning mb-3">다시 작성</button><br/>
+		  </div>
+		  <div class="col">
+		  	<button type="button" data-toggle="button" class="btn btn-outline-dark btn-sm mb-3">아이디 기억</button><br/>
 		  </div>
 	  </div>
 	  <button type="button" onclick="location.href='IdpasswordSearch.member'" class="btn btn-primary btn-sm">아이디/비밀번호찾기</button>

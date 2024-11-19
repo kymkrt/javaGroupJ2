@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <c:set var="ctp" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html>
@@ -36,67 +37,114 @@
 <p><br /></p>
 <div class="container">
   <div class="row partList border">
-  	<div class="col">
-  		<a href="FreeList.board?part=all" class="part all">전체</a>
-  	</div>
-  	<div class="col">
-  		<a href="FreeList.board?part=chat" class="part chat">잡담</a>
-  	</div>
-  	<div class="col">
-  		<a href="FreeList.board?part=humor" class="part humor">유머</a>
-  	</div>
-  	<div class="col">
-  		<a href="FreeList.board?part=food" class="part food">음식</a>
-  	</div>
-  	<div class="col">
-  		<a href="FreeList.board?part=plant" class="part plant">식쇼</a>
-  	</div>
-  	<div class="col">
-  		<a href="FreeList.board?part=review" class="part review">후기</a>
-  	</div>
+  	<c:if test="${part=='all'}">
+	  	<div class="col">
+	  		<b><a href="FreeList.board?part=all" class="part all">전체</a></b>
+	  	</div>
+  	</c:if>
+  	<c:if test="${part !='all'}">
+	  	<div class="col">
+	  		<a href="FreeList.board?part=all" class="part all">전체</a>
+	  	</div>
+  	</c:if>
+  	<c:if test="${part=='chat'}">
+	  	<div class="col">
+	  		<b><a href="FreeList.board?part=chat" class="part chat">잡담</a></b>
+	  	</div>
+  	</c:if>
+  	<c:if test="${part != 'chat'}">
+	  	<div class="col">
+	  		<a href="FreeList.board?part=chat" class="part chat">잡담</a>
+	  	</div>
+  	</c:if>
+  	<c:if test="${part=='humor'}">
+	  	<div class="col">
+	  		<b><a href="FreeList.board?part=humor" class="part humor">유머</a></b>
+	  	</div>
+  	</c:if>
+  	<c:if test="${part !='humor'}">
+	  	<div class="col">
+	  		<a href="FreeList.board?part=humor" class="part humor">유머</a>
+	  	</div>
+  	</c:if>
+  	<c:if test="${part=='food'}">
+	  	<div class="col">
+	  		<b><a href="FreeList.board?part=food" class="part food">음식</a></b>
+	  	</div>
+  	</c:if>
+  	<c:if test="${part !='food'}">
+	  	<div class="col">
+	  		<a href="FreeList.board?part=food" class="part food">음식</a>
+	  	</div>
+  	</c:if>
+  	<c:if test="${part =='plant'}">
+	  	<div class="col">
+	  		<b><a href="FreeList.board?part=plant" class="part plant">식쇼</a></b>
+	  	</div>
+  	</c:if>
+  	<c:if test="${part !='plant'}">
+	  	<div class="col">
+	  		<a href="FreeList.board?part=plant" class="part plant">식쇼</a>
+	  	</div>
+  	</c:if>
+  	<c:if test="${part =='review'}">
+	  	<div class="col">
+	  		<b><a href="FreeList.board?part=review" class="part review">후기</a></b>
+	  	</div>
+  	</c:if>
+  	<c:if test="${part !='review'}">
+	  	<div class="col">
+	  		<a href="FreeList.board?part=review" class="part review">후기</a>
+	  	</div>
+  	</c:if>
   </div>
-  <div class="row">
-  	<div class="col">
-  		<h2>Best게시글</h2>
-  	</div>
-  </div>
-	<div class="row">
-  	<div class="col">
-  		<h3>베스트글</h3>
-    <ul>
-        <li><a href=""></a></li>
-        <li><a href=""></a></li>
-        <li><a href=""></a></li>
-        <li><a href=""></a></li>
-    </ul>
-  	</div>
-  	<div class="col">
-  		<h3>관심많은상품</h3>
-	    <ul>
-	        <li><a href=""></a></li>
-	        <li><a href=""></a></li>
-	        <li><a href=""></a></li>
-	        <li><a href=""></a></li>
-	    </ul>
-  	</div>
-	</div>  
-  <table>
- 		<tr>
+  <div class="best">
+	  <div class="row">
+	  	<div class="col">
+	  		<h2>Best게시글</h2>
+	  	</div>
+	  </div>
+	  <table class="table table-borderless table-hover">
+	  	<tr>
+	  		<th class="text-center">베스트 게시글</th>
+	  		<th class="text-center">관심많은 상품</th>
+	  	</tr>
+	  	<c:forEach var="vo" items="${vosBest}" varStatus="st">
+		  	<tr>
+		  		<td><a href="FreeDetailView.board?idx=${vo.idx}">${vo.title }</a></td>
+		  	</tr>
+	  	</c:forEach>
+		  	<tr>
+		  		<td><a href=""></a></td>
+		  		<td><a href=""></a></td>
+		  		<td><a href=""></a></td>
+		  	</tr>
+	  </table>
+	</div>
+	<c:if test="${!empty sMid}">
+		<div class="text-right">
+			<button type="button" onclick="location.href='FreeBoardInput.board'" class="btn btn-success mb-3">글작성</button>
+		</div>
+	</c:if>
+  <table class="table table-bordered table-hover">
+ 		<tr class="table-dark">
  			<th>번호</th>
  			<th>분류</th>
  			<th>제목</th>
  			<th>작성자</th>
  			<th>작성일</th>
  			<th>조회수</th>
+ 			<th>좋아요</th>
  		</tr>
  		<c:forEach var="vo" items="${vos}" varStatus="st">
  			<tr>
- 				<td>${curScrStartNo}</td>
+ 				<td>${st.count}</td>
  				<td>${vo.part}</td>
- 				<td>${vo.title}</td>
+ 				<td><a href="FreeDetailView.board?idx=${vo.idx}">${vo.title}</a></td>
  				<td>${vo.nickName}</td>
- 				<td>${vo.wDate}</td>
+ 				<td>${fn:substring(vo.wDate, 0, 19)}</td>
  				<td>${vo.viewCnt }</td>
+ 				<td>${vo.good}</td>
  			</tr>
  		</c:forEach>
   </table>

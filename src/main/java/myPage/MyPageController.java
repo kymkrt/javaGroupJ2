@@ -24,13 +24,29 @@ public class MyPageController extends HttpServlet{
 		HttpSession session = request.getSession();
 		int level = session.getAttribute("sLevel")==null ? 999 : (int)session.getAttribute("sLevel");
 
-		if(level > 4) {
+		if(level > 4 || level < 0) {
 			request.setAttribute("message", "회원만 사용가능합니다");
 			request.setAttribute("url", "/MemberLogin.mem");
 			viewPage = "/include/message.jsp"; 
 		}
 		else if(com.equals("/MyPageMain")) {
-			viewPage = "/myPageMain.jsp";
+			viewPage += "/myPageMain.jsp";
+		}
+		else if(com.equals("/MyPageMain")) {
+			viewPage += "/myPageMain.jsp";
+		}
+		else if(com.equals("/MyInfo")) {
+			command = new MyInfoCommand();
+			command.execute(request, response);
+			viewPage += "/idpasswordSearch.jsp"; 
+		}
+		else if(com.equals("/MyInfoUpdate")) {
+			viewPage += "/memberInfoUpdate.jsp"; 
+		}
+		else if(com.equals("/MyInfoUpdateOk")) {
+			command = new MyInfoUpdateCommand();
+			command.execute(request, response);
+			viewPage += "/myPageMain.jsp"; 
 		}
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
