@@ -35,17 +35,59 @@
   <script defer>
   	'use script';
   
-    function loadContent(event) {
-      event.preventDefault(); // 링크 기본 동작 막기
-      const url = event.target.getAttribute('href'); // 클릭한 링크의 href 가져오기
-			
-      fetch(url)
-        .then(response => response.text())
-        .then(html => {
-          document.getElementById('content').innerHTML = html; // 콘텐츠 로드
-        })
-        .catch(error => console.error('Error loading content:', error));
-   	}
+  	function loadContent(event) {
+  	    if (event) event.preventDefault(); // 링크 기본 동작 막기
+  	    const url = event ? event.target.getAttribute('href') : location.hash.substring(1) || 'MyDashBoard.my'; // 클릭한 링크의 href 가져오기 또는 기본 페이지 설정
+  	    
+  	    history.pushState(null, '', `#${url}`); // URL 해시 업데이트
+  	    fetch(url)
+  	      .then(response => response.text())
+  	      .then(html => {
+  	        document.getElementById('content').innerHTML = html; // 콘텐츠 로드
+  	      })
+  	      .catch(error => console.error('Error loading content:', error));
+  	  }
+
+  	  // 페이지 로드 시 현재 해시값을 기준으로 콘텐츠 로드
+  	  window.addEventListener('load', () => {
+  	    if (location.hash) {
+  	      loadContent(null); // 해시 기반 콘텐츠 로드
+  	    } else {
+  	      history.replaceState(null, '', '#MyDashBoard.my'); // 기본 페이지 설정
+  	      loadContent(null);
+  	    }
+  	  });
+
+  	  // 브라우저 뒤로가기/앞으로가기 시 콘텐츠 로드
+  	  window.addEventListener('popstate', () => {
+  	    loadContent(null);
+  	  });
+  	  
+			function fCheck() {
+		
+	  		let mid = myform.mid.value;
+	  		let pwd = myform.pwd.value;
+	  		
+	  		if(mid == "") {
+	  			alert("아이디를 입력해주세요");
+	  			myform.mid.focus();
+	  			return false;
+	  		}
+	  		else if(pwd == "") {
+	  			alert("비밀번호를 입력해주세요");
+	  			myform.pwd.focus();
+	  			return false;
+	  		}
+	  		
+	  		let ans = confirm("회원 탈퇴 신청을 하시겠습니까?");
+				if(ans) {
+					ans = confirm("회원 탈퇴를 하시면 1개월간 같은 아이디로 가입하실수 없습니다. \n 계속 진행하시겠습니까?");
+					if(ans) {
+						myform.action = "MyWithdrawOk.my";
+						myform.submit();
+					}
+				}
+			}
   </script>
 </head>
 <body>
@@ -53,28 +95,31 @@
     <h2><a class="nav-link" href="${ctp}/MainPage">홈</a></h2>
     <ul class="nav flex-column">
       <li class="nav-item">
-        <a class="nav-link" href="MyPageMain.my" onclick="loadContent(event)">대시보드</a>
+        <a class="nav-link" href="MyDashBoard.my" onclick="loadContent(event)">대시보드</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#" onclick="loadContent(event)">일정보기</a>
+        <a class="nav-link" href="MySchedule.my" onclick="loadContent(event)">일정보기</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#" onclick="loadContent(event)">관심상품</a>
+        <a class="nav-link" href="MyProduct.my" onclick="loadContent(event)">내 상품 보기</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#" onclick="loadContent(event)">견적문의</a>
+        <a class="nav-link" href="MySelectProduct.my" onclick="loadContent(event)">관심상품</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#" onclick="loadContent(event)">메세지관리</a>
+        <a class="nav-link" href="MyEstimate.my" onclick="loadContent(event)">견적문의</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="MyInfo.My" onclick="loadContent(event)">내정보 보기</a>
+        <a class="nav-link" href="MyMessage.my" onclick="loadContent(event)">메세지관리</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="MyInfoUpdate.My" onclick="loadContent(event)">개인정보수정</a>
+        <a class="nav-link" href="MyInfo.my" onclick="loadContent(event)">내정보 보기</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#" onclick="loadContent(event)">회원탈퇴</a>
+        <a class="nav-link" href="MyInfoUpdateCheck.my" onclick="loadContent(event)">개인정보수정</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="MyWithdrawCheck.my" onclick="loadContent(event)">회원탈퇴</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="IdpasswordSearch.member" onclick="loadContent(event)">spa확인</a>

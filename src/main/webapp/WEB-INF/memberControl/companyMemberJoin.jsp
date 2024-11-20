@@ -7,6 +7,7 @@
   <meta charset="UTF-8">
   <title>companyMemberJoin.jsp</title>
   <jsp:include page="/include/bs4.jsp" />
+  <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
    <style type="text/css">
   	.box{
 	    width: 100%;

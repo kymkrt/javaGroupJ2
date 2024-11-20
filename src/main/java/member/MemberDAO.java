@@ -346,13 +346,80 @@ public class MemberDAO {
 		return vo;
 	}
 
-	//회원 정보 수정
-	public int setMemberUpdateOk(String mid) {
+	//개인정보수정 확인
+	public int getMyInfoCheckOk(String mid, String pwd) {
 		int res = 0;
-		
-		
+		try {
+			sql="select * from member where mid = ? and pwd =?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, mid);
+			pstmt.setString(2, pwd);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				res = 1;
+			}
+		} catch (SQLException e) {
+			System.out.println("sql오류(getMyInfoUpdateCheckOk) : "+e.getMessage());
+		}finally {
+			rsClose();
+		}
 		return res;
 	}
+	
+	//회원 정보 수정
+	public int setMemberUpdateOk(MemberVO vo) {
+		int res = 0;
+		try {
+				
+				sql = "update member set pwd=?, nickName=?, name=?, telMain=?,telSub=?,address=?,email=?,content=?,photo=?,advertiseCheck=?,"
+						+ "userInfo=?,userType=?,pwdCheckQ=?,fax=?,companyName=?,BSNum=? where mid = ? ";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, vo.getPwd());
+				pstmt.setString(2, vo.getNickName());
+				pstmt.setString(3, vo.getName());
+				pstmt.setString(4, vo.getTelMain());
+				pstmt.setString(5, vo.getTelSub());
+				pstmt.setString(6, vo.getAddress());
+				pstmt.setString(7, vo.getEmail());
+				pstmt.setString(8, vo.getContent());
+				pstmt.setString(9, vo.getPhoto());
+				pstmt.setString(10, vo.getAdvertiseCheck());
+				pstmt.setString(11, vo.getUserInfo());
+				pstmt.setString(12, vo.getUserType());
+				pstmt.setString(13, vo.getPwdCheckQ());
+				pstmt.setString(14, vo.getFax());
+				pstmt.setString(15, vo.getCompanyName());
+				pstmt.setString(16, vo.getBSNum());
+				pstmt.setString(17, vo.getMid());
+				
+			
+			res = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("sql오류(setMemberUpdateOk) : "+e.getMessage());
+		}finally {
+			pstmtClose();
+		}
+		return res;
+	}
+
+	//회원 탈퇴 mid만 변경
+	public int setMemberDelete(String mid) {
+		int res = 0;
+		try {
+			sql = "update member set mid = CONCAT('withDraw', idx), userDel='OK', level='99' where memoryMid = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, mid);
+			res = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			System.out.println("sql오류(setMemberDelete) : "+e.getMessage());
+		}finally {
+			pstmtClose();
+		}
+		return res;
+	}
+
 	
 	
 

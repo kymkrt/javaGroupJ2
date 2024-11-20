@@ -82,8 +82,11 @@ public class BoardDAO {
 		try {
 			if(level == 999) {
 				sql = "select count(idx) as totRecCnt from "+table+" where claim = 'NO'";//as 뒤는 변수명이라 마음대로 줘도 됨
-				pstmt = conn.prepareStatement(sql);
 			}
+			if(table.equals("announcementboard")) {
+				sql = "select count(idx) as totRecCnt from "+table;
+			}
+			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			
 			rs.next();
@@ -100,7 +103,7 @@ public class BoardDAO {
 	public List<FreeBoardVO> getMonthBestList(String part, String table) {
 		List<FreeBoardVO> vosBest = new ArrayList<>();
 		try {
-			sql = "select * from "+table+" WHERE wDate >= DATE_SUB(CURDATE(), INTERVAL 1 MONTH) and claim = NO ORDER BY viewCnt DESC, wDate DESC "
+			sql = "select * from "+table+" WHERE wDate >= DATE_SUB(CURDATE(), INTERVAL 1 MONTH) and claim = 'NO' ORDER BY viewCnt DESC, wDate DESC "
 					+ "LIMIT 3";
 			pstmt = conn.prepareStatement(sql);
 			

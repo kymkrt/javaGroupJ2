@@ -5,17 +5,22 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>.jsp</title>
+  <title>adminDashBoard.jsp</title>
   <jsp:include page="/include/bs4.jsp" />
 </head>
 <body>
-<jsp:include page="/include/header.jsp" />
-<jsp:include page="/include/nav.jsp" />
 <p><br /></p>
 <div class="container">
+  대시보드
+  기간 일주일
+  신규가입 회원
+  신규견적문의
+  신규 탈퇴회원 
+  신규 신고
+  신규메세지
+  신규 식물 정보
   
 </div>
 <p><br /></p>
-<jsp:include page="/include/footer.jsp" />
 </body>
 </html>

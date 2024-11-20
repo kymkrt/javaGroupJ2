@@ -26,22 +26,60 @@ public class MyPageController extends HttpServlet{
 
 		if(level > 4 || level < 0) {
 			request.setAttribute("message", "회원만 사용가능합니다");
-			request.setAttribute("url", "/MemberLogin.mem");
+			request.setAttribute("url", "/MemberLogin.member");
 			viewPage = "/include/message.jsp"; 
 		}
 		else if(com.equals("/MyPageMain")) {
 			viewPage += "/myPageMain.jsp";
 		}
-		else if(com.equals("/MyPageMain")) {
-			viewPage += "/myPageMain.jsp";
+		else if(com.equals("/MyDashBoard")) {
+			viewPage += "/myDashBoard.jsp";
+		}
+		else if(com.equals("/MySchedule")) {
+			viewPage += "/mySchedule.jsp";
+		}
+		else if(com.equals("/MyProduct")) {
+			viewPage += "/myProduct.jsp";
+		}
+		else if(com.equals("/MySelectProduct")) {
+			viewPage += "/mySelectProduct.jsp";
+		}
+		else if(com.equals("/MyEstimate")) {
+			viewPage += "/myEstimate.jsp";
+		}
+		else if(com.equals("/MyMessage")) {
+			viewPage += "/myMessage.jsp";
 		}
 		else if(com.equals("/MyInfo")) {
 			command = new MyInfoCommand();
 			command.execute(request, response);
-			viewPage += "/idpasswordSearch.jsp"; 
+			viewPage += "/myInfo.jsp";
+		}
+		else if(com.equals("/MyInfoUpdateCheck")) {
+			viewPage += "/myInfoUpdateCheck.jsp"; 
+		}
+		else if(com.equals("/MyInfoUpdateCheckOk")) {
+			command = new MyInfoUpdateCheckOkCommand();
+			command.execute(request, response);
+			viewPage = "/include/message.jsp"; 
 		}
 		else if(com.equals("/MyInfoUpdate")) {
-			viewPage += "/memberInfoUpdate.jsp"; 
+			command = new MyInfoUpdateCommand();
+			command.execute(request, response);
+			viewPage += "/myInfoUpdate.jsp"; 
+		}
+		else if(com.equals("/MyInfoUpdateOk")) {
+			command = new MyInfoUpdateOkCommand();
+			command.execute(request, response);
+			viewPage = "/include/message.jsp"; 
+		}
+		else if(com.equals("/MyWithdrawCheck")) {
+			viewPage += "/myWithdrawCheck.jsp"; 
+		}
+		else if(com.equals("/MyWithdrawOk")) {
+			command = new MyWithdrawOkCommand();
+			command.execute(request, response);
+			viewPage = "/include/message.jsp";
 		}
 		else if(com.equals("/MyInfoUpdateOk")) {
 			command = new MyInfoUpdateCommand();

@@ -1,7 +1,7 @@
 package board;
 
 public class AnnoBoardVO {
-
+	
 	private int idx;
 	private String mid;
 	private String nickName;
@@ -11,52 +11,52 @@ public class AnnoBoardVO {
 	private String wDate;
 	private String file;
 	
-	int getIdx() {
+	public int getIdx() {
 		return idx;
 	}
-	void setIdx(int idx) {
+	public void setIdx(int idx) {
 		this.idx = idx;
 	}
-	String getMid() {
+	public String getMid() {
 		return mid;
 	}
-	void setMid(String mid) {
+	public void setMid(String mid) {
 		this.mid = mid;
 	}
-	String getNickName() {
+	public String getNickName() {
 		return nickName;
 	}
-	void setNickName(String nickName) {
+	public void setNickName(String nickName) {
 		this.nickName = nickName;
 	}
-	String getTitle() {
+	public String getTitle() {
 		return title;
 	}
-	void setTitle(String title) {
+	public void setTitle(String title) {
 		this.title = title;
 	}
-	String getContent() {
+	public String getContent() {
 		return content;
 	}
-	void setContent(String content) {
+	public void setContent(String content) {
 		this.content = content;
 	}
-	int getViewCnt() {
+	public int getViewCnt() {
 		return viewCnt;
 	}
-	void setViewCnt(int viewCnt) {
+	public void setViewCnt(int viewCnt) {
 		this.viewCnt = viewCnt;
 	}
-	String getwDate() {
+	public String getwDate() {
 		return wDate;
 	}
-	void setwDate(String wDate) {
+	public void setwDate(String wDate) {
 		this.wDate = wDate;
 	}
-	String getFile() {
+	public String getFile() {
 		return file;
 	}
-	void setFile(String file) {
+	public void setFile(String file) {
 		this.file = file;
 	}
 	

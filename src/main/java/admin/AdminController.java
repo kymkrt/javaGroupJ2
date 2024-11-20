@@ -32,6 +32,28 @@ public class AdminController extends HttpServlet{
 		else if(com.equals("/AdminMain")) {
 			viewPage += "/adminMain.jsp"; 
 		}
+		else if(com.equals("/AdminDashBoard")) {
+			System.out.println("대시보드");
+			viewPage += "/adminDashBoard.jsp"; 
+		}
+		else if(com.equals("/AdminMemberControl")) {
+			viewPage += "/adminMemberControl.jsp"; 
+		}
+		else if(com.equals("/AdminEstimateControl")) {
+			viewPage += "/adminEstimateControl.jsp"; 
+		}
+		else if(com.equals("/AdminBoardControl")) {
+			viewPage += "/adminBoardControl.jsp"; 
+		}
+		else if(com.equals("/AdminMessageControl")) {
+			viewPage += "/adminMessageControl.jsp"; 
+		}
+		else if(com.equals("/AdminClaimControl")) {
+			viewPage += "/adminClaimControl.jsp"; 
+		}
+		else if(com.equals("/AdminScheduleControl")) {
+			viewPage += "/adminScheduleControl.jsp"; 
+		}
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
 		dispatcher.forward(request, response);

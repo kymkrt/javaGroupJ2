@@ -34,14 +34,12 @@ public class MemberLoginOkCommand implements MemberInterface {
 			request.setAttribute("url", "MemberLogin.member");
 		}
 		else if(vo.getMid() != null && vo.getMid().equals("admin")) {
-			System.out.println("관리자 로그인 커맨드");
 			dao.setCntPlus(mid);
 			dao.setDateUpdate(mid);
 			request.setAttribute("message", "NO");
 			request.setAttribute("url", "AdminMain.ad");
 		}
 		else if(vo.getMid() != null && !vo.getMid().equals("admin")) {
-			System.out.println("일반멤버 확정 커맨드");
 			dao.setCntPlus(mid);
 			dao.setDateUpdate(mid);
 			request.setAttribute("message", "NO");

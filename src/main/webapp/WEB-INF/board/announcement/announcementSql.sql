@@ -12,6 +12,6 @@ create table announcementBoard(
 	wDate datetime default now(), /*글올린 날짜*/
   file varchar(200) default '없음', /*업로드 파일*/
 	primary key(idx),
-	foreign key(mid) references member(mid)	
+	foreign key(mid) references member(memoryMid)	
 );
 

@@ -22,7 +22,7 @@ create table member (
 	email varchar(60) not null, /*이메일(아이디/비밀번호 분실시에 사용) - 형식체크(유효성검사)필수 */
 	content text, /*자기소개*/
 	photo varchar(100) default 'noimage.jpg', /*회원사진*/	
-	advertiseCheck char(2) not null default 'O', /*광고 동의 여부*/
+	advertiseCheck char(3) not null default '동의', /*광고 동의 여부*/
 	userInfo char(3) default '공개', /*회원의 정보 공개 유무(공개/비공개) 고정길이 실무에선 ok/no같은 방식 많이 씀*/
 	userType char(6) not null default '개인',/*사업자 개인 선택 리드온리 처리*/
 	pwdCheckQ varchar(100) not null, /*비밀번호 찾기 질문*/
@@ -31,7 +31,7 @@ create table member (
 	companyName varchar(100), /*회사명 사업자 일때만*/
 	BSNum varchar(15) default '0', /*사업자 번호 없으면 0*/
 	/*관리자 처리 부분*/
-	userDel char(2) default 'NO', /*회원 탈퇴 신청 여부(NO:현재 활동중, OK:탈퇴신청중)*/
+	userDel char(3) default 'NO', /*회원 탈퇴 신청 여부(NO:현재 활동중, OK:탈퇴신청중)*/
 	level int default 1, /*회원 등급(0:관리자, 1:준회원, 2:정회원, 3,:우수회원 (4:운영자), 99:탈퇴신청회원)*/
 	point int default 100, /* 회원 누적 포인트*/
 	visitCnt int default 0, /*총 방문 횟수*/

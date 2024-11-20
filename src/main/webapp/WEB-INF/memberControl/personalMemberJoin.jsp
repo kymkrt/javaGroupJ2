@@ -106,7 +106,7 @@
 			let nickName = myform.nickName.value;
 			if(!regexNickName.test(nickName.trim())){
 	  			alert("닉네임 형식을 확인해주세요");
-					myform.mid.focus();
+					myform.nickName.focus();
 					return false;
 	  		}
   		swNick = 1;
@@ -220,7 +220,7 @@
 				</div>
 				<div class="col-8">
 					<input 
-						type="text" name="pwd" id="pwd"
+						type="password" name="pwd" id="pwd"
 						placeholder="영문 및 숫자 _!@#$%기호 최소4자 최대 20자" class="form-control" required 
 					/>
 				</div>	
@@ -229,7 +229,7 @@
 				<div class="col-4">
 					비밀번호 찾기 질문
 				</div>
-				<div class="col-4">
+				<div class="col-6">
 					<select name="pwdCheckAsk" class="form-control">
 						<option>가장 소중한것은?</option>
 						<option>가장 좋아하는 음식은?</option>
@@ -237,7 +237,7 @@
 						<option>가장 추억이 많은 장소는?</option>
 					</select>
 				</div>
-				<div class="col-4">
+				<div class="col-6">
 					<input 
 						type="text" name="pwdCheckAns" id="pwdCheckAns"
 						placeholder="한글 및 영문, 숫자 최소1자 최대 50자" class="form-control" required 
@@ -265,13 +265,13 @@
 						placeholder="영문 및 숫자, 한글 _기호 최소3자 최대 10자" class="form-control" required 
 					/>
 					<div class="input-group-append">
-			    <button  type="button" onclick="nickNameCheck()" class="btn btn-info">닉네임체크</button>
+			    	<button  type="button" onclick="nickNameCheck()" class="btn btn-info">닉네임체크</button>
 			 		</div>
 				</div>	
 			</div>
 			<div class="row mb-4">
 				<div class="col-4">
-					전화번호1
+					주전화번호
 				</div>
 				<div class="col-8">
 					<input 
@@ -282,7 +282,7 @@
 			</div>
 			<div class="row mb-4">
 				<div class="col-4">
-					전화번호2
+					부전화번호
 				</div>
 				<div class="col-8">
 					<input 

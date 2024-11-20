@@ -53,25 +53,25 @@
     <h2><a class="nav-link" href="${ctp}/MainPage">홈</a></h2>
     <ul class="nav flex-column">
       <li class="nav-item">
-        <a class="nav-link" href="AdminDashBoard.admin" onclick="loadContent(event)">대시보드</a>
+        <a class="nav-link" href="AdminDashBoard.ad" onclick="loadContent(event)">대시보드</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#" onclick="loadContent(event)">회원관리</a>
+        <a class="nav-link" href="AdminMemberControl.ad" onclick="loadContent(event)">회원관리</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#" onclick="loadContent(event)">최근 신청 견적</a>
+        <a class="nav-link" href="AdminEstimateControl.ad" onclick="loadContent(event)">최근 신청 견적</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#" onclick="loadContent(event)">게시판관리</a>
+        <a class="nav-link" href="AdminBoardControl.ad" onclick="loadContent(event)">게시판관리</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#" onclick="loadContent(event)">메세지관리</a>
+        <a class="nav-link" href="AdminMessageControl.ad" onclick="loadContent(event)">메세지관리</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="MemberInfo.member" onclick="loadContent(event)">신고관리</a>
+        <a class="nav-link" href="AdminClaimControl.ad" onclick="loadContent(event)">신고관리</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="MemberInfoUpdate.member" onclick="loadContent(event)">회원관리</a>
+        <a class="nav-link" href="AdminScheduleControl.ad" onclick="loadContent(event)">스케줄관리</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#" onclick="loadContent(event)">회원탈퇴</a>
