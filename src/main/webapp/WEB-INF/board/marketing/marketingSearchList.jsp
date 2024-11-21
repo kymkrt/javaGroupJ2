@@ -90,7 +90,7 @@
 	  	</div>
   	</c:if>
   </div>
-  <div class="best">
+  <%-- <div class="best">
 	  <div class="row">
 	  	<div class="col">
 	  		<h2>Best게시글</h2>
@@ -103,9 +103,7 @@
 	  	</tr>
 	  	<c:forEach var="vo" items="${vosBest}" varStatus="st">
 		  	<tr>
-		  		<td><a href="MarketingDetailView.board?idx=${vo.idx}">${vo.title }</a>
-		  		&nbsp;<i class="bi bi-caret-up-fill"></i>${vo.viewCnt}
-		  		&nbsp;<i class="bi bi-hand-thumbs-up-fill"></i>${vo.good}</td>
+		  		<td><a href="MarketingDetailView.board?idx=${vo.idx}">${vo.title }</a></td>
 		  	</tr>
 	  	</c:forEach>
 		  	<tr>
@@ -114,7 +112,7 @@
 		  		<td><a href=""></a></td>
 		  	</tr>
 	  </table>
-	</div>
+	</div> --%>
   <table class="table table-bordered table-hover">
  		<tr class="table-dark">
  			<th>번호</th>
@@ -140,14 +138,14 @@
   <!--페이지네이션  -->
   <div class="text-center">
   <ul class="pagination justify-content-center">
-	  <c:if test="${pag > 1}"><li class="page-item"><a class="page-link text-secondary" href="MarketingList.board?pag=1&pageSize=${pageSize}">첫페이지</a></li></c:if>
-	  <c:if test="${curBlock > 0}"><li class="page-item"><a class="page-link text-secondary" href="MarketingList.board?pag=${(curBlock-1)*blockSize + 1}&pageSize=${pageSize}">이전블록</a></li></c:if>
+	  <c:if test="${pag > 1}"><li class="page-item"><a class="page-link text-secondary" href="MarketingListSearch.board?pag=1&pageSize=${pageSize}&partkey=${partkey}&keyword=${keyword}">첫페이지</a></li></c:if>
+	  <c:if test="${curBlock > 0}"><li class="page-item"><a class="page-link text-secondary" href="MarketingListSearch.board?pag=${(curBlock-1)*blockSize + 1}&pageSize=${pageSize}&partkey=${partkey}&keyword=${keyword}">이전블록</a></li></c:if>
 	  <c:forEach var="i" begin="${(curBlock*blockSize)+1}" end="${(curBlock*blockSize) + blockSize}" varStatus="st">
-	    <c:if test="${i <= totPage && i == pag}"><li class="page-item active"><a class="page-link bg-secondary border-secondary" href="MarketingList.board?pag=${i}&pageSize=${pageSize}">${i}</a></li></c:if>
-	    <c:if test="${i <= totPage && i != pag}"><li class="page-item"><a class="page-link text-secondary" href="MarketingList.board?pag=${i}&pageSize=${pageSize}">${i}</a></li></c:if>
+	    <c:if test="${i <= totPage && i == pag}"><li class="page-item active"><a class="page-link bg-secondary border-secondary" href="MarketingListSearch.board?pag=${i}&pageSize=${pageSize}&partkey=${partkey}&keyword=${keyword}">${i}</a></li></c:if>
+	    <c:if test="${i <= totPage && i != pag}"><li class="page-item"><a class="page-link text-secondary" href="MarketingListSearch.board?pag=${i}&pageSize=${pageSize}">${i}</a></li></c:if>
 	  </c:forEach>
-	  <c:if test="${curBlock < lastBlock}"><li class="page-item"><a class="page-link text-secondary" href="MarketingList.board?pag=${(curBlock+1)*blockSize+1}&pageSize=${pageSize}">다음블록</a></li></c:if>
-	  <c:if test="${pag < totPage}"><li class="page-item"><a class="page-link text-secondary" href="MarketingList.board?pag=${totPage}&pageSize=${pageSize}">마지막페이지</a></li></c:if>
+	  <c:if test="${curBlock < lastBlock}"><li class="page-item"><a class="page-link text-secondary" href="MarketingListSearch.board?pag=${(curBlock+1)*blockSize+1}&pageSize=${pageSize}&partkey=${partkey}&keyword=${keyword}">다음블록</a></li></c:if>
+	  <c:if test="${pag < totPage}"><li class="page-item"><a class="page-link text-secondary" href="MarketingListSearch.board?pag=${totPage}&pageSize=${pageSize}&partkey=${partkey}&keyword=${keyword}">마지막페이지</a></li></c:if>
   </ul>
 	</div>
 	<c:if test="${!empty sLevel}">
@@ -156,20 +154,20 @@
 		</div>
 	</c:if>
   <!--검색-->
-  <form name="myform" action="MarketingListSearch.board">
+  <form name="myform">
   	<div class="row">
   		<div class="col-3">
 	    	<select name="partkey" id="partkey" class="form-control">
-	    		<option value="nickName">작성자</option>
-	    		<option value="content">글내용</option>
-	    		<option value="title">제목</option>
+	    		<option value="nickName" ${partkey=='nickName' ? 'selected' : ''}>작성자</option>
+	    		<option value="content" ${partkey=='content' ? 'selected' : ''}>글내용</option>
+	    		<option value="title" ${partkey=='title' ? 'selected' : ''}>제목</option>
 	    	</select>
 	    </div>
   		<div class="col-6">
-		    <input type="text" name="keyword" id="keyword" class="form-control" />
+		    <input type="text" name="keyword" id="keyword" value="${keyword}" class="form-control" />
 	    </div>
   		<div class="col-3">
-		    <button type="submit" class="btn btn-info form-control">검색</button>
+		    <button type="button" onclick="listSearch()" class="btn btn-info form-control">검색</button>
 	    </div>
 	   </div>
   </form>

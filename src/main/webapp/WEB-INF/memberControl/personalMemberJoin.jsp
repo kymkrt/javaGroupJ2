@@ -229,7 +229,7 @@
 				<div class="col-4">
 					비밀번호 찾기 질문
 				</div>
-				<div class="col-6">
+				<div class="col-4">
 					<select name="pwdCheckAsk" class="form-control">
 						<option>가장 소중한것은?</option>
 						<option>가장 좋아하는 음식은?</option>
@@ -237,7 +237,7 @@
 						<option>가장 추억이 많은 장소는?</option>
 					</select>
 				</div>
-				<div class="col-6">
+				<div class="col-4">
 					<input 
 						type="text" name="pwdCheckAns" id="pwdCheckAns"
 						placeholder="한글 및 영문, 숫자 최소1자 최대 50자" class="form-control" required 

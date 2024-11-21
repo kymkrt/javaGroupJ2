@@ -6,7 +6,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>freeList.jsp</title>
+  <title>freeSearchList.jsp</title>
   <jsp:include page="/include/bs4.jsp" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <style type="text/css">
@@ -25,6 +25,14 @@
   </style>
   <script type="text/javascript">
   	'use strict';
+  	
+  	function listSearch() {
+			let partkey = document.getElementById("partkey").value;
+			let keyword = document.getElementById("keyword").value;
+			
+			myform.action = "FreeListSearch.board?partkey="+partkey+"&keyword="+keyword;
+			myform.submit();
+		}
   	
   </script>
 </head>
@@ -144,14 +152,14 @@
   <!--페이지네이션  -->
   <div class="text-center">
   <ul class="pagination justify-content-center">
-	  <c:if test="${pag > 1}"><li class="page-item"><a class="page-link text-secondary" href="FreeList.board?pag=1&pageSize=${pageSize}">첫페이지</a></li></c:if>
-	  <c:if test="${curBlock > 0}"><li class="page-item"><a class="page-link text-secondary" href="FreeList.board?pag=${(curBlock-1)*blockSize + 1}&pageSize=${pageSize}">이전블록</a></li></c:if>
+	  <c:if test="${pag > 1}"><li class="page-item"><a class="page-link text-secondary" href="FreeListSearch.board?pag=1&pageSize=${pageSize}&partkey=${partkey}&keyword=${keyword}">첫페이지</a></li></c:if>
+	  <c:if test="${curBlock > 0}"><li class="page-item"><a class="page-link text-secondary" href="FreeListSearch.board?pag=${(curBlock-1)*blockSize + 1}&pageSize=${pageSize}&partkey=${partkey}&keyword=${keyword}">이전블록</a></li></c:if>
 	  <c:forEach var="i" begin="${(curBlock*blockSize)+1}" end="${(curBlock*blockSize) + blockSize}" varStatus="st">
-	    <c:if test="${i <= totPage && i == pag}"><li class="page-item active"><a class="page-link bg-secondary border-secondary" href="FreeList.board?pag=${i}&pageSize=${pageSize}">${i}</a></li></c:if>
-	    <c:if test="${i <= totPage && i != pag}"><li class="page-item"><a class="page-link text-secondary" href="FreeList.board?pag=${i}&pageSize=${pageSize}">${i}</a></li></c:if>
+	    <c:if test="${i <= totPage && i == pag}"><li class="page-item active"><a class="page-link bg-secondary border-secondary" href="FreeListSearch.board?pag=${i}&pageSize=${pageSize}&partkey=${partkey}&keyword=${keyword}">${i}</a></li></c:if>
+	    <c:if test="${i <= totPage && i != pag}"><li class="page-item"><a class="page-link text-secondary" href="FreeListSearch.board?pag=${i}&pageSize=${pageSize}&partkey=${partkey}&keyword=${keyword}">${i}</a></li></c:if>
 	  </c:forEach>
-	  <c:if test="${curBlock < lastBlock}"><li class="page-item"><a class="page-link text-secondary" href="FreeList.board?pag=${(curBlock+1)*blockSize+1}&pageSize=${pageSize}">다음블록</a></li></c:if>
-	  <c:if test="${pag < totPage}"><li class="page-item"><a class="page-link text-secondary" href="FreeList.board?pag=${totPage}&pageSize=${pageSize}">마지막페이지</a></li></c:if>
+	  <c:if test="${curBlock < lastBlock}"><li class="page-item"><a class="page-link text-secondary" href="FreeListSearch.board?pag=${(curBlock+1)*blockSize+1}&pageSize=${pageSize}&partkey=${partkey}&keyword=${keyword}">다음블록</a></li></c:if>
+	  <c:if test="${pag < totPage}"><li class="page-item"><a class="page-link text-secondary" href="FreeListSearch.board?pag=${totPage}&pageSize=${pageSize}&partkey=${partkey}&keyword=${keyword}">마지막페이지</a></li></c:if>
   </ul>
 	</div>
 	<c:if test="${!empty sLevel}">
@@ -160,23 +168,24 @@
 		</div>
 	</c:if>
   <!--검색-->
-  <form name="myform" action="FreeListSearch.board">
+  <form name="myform">
   	<div class="row">
   		<div class="col-3">
 	    	<select name="partkey" id="partkey" class="form-control">
-	    		<option value="nickName" selected>작성자</option>
-	    		<option value="content">글내용</option>
-	    		<option value="title">제목</option>
+	    		<option value="nickName" ${partkey=='nickName' ? 'selected' : ''}>작성자</option>
+	    		<option value="content" ${partkey=='content' ? 'selected' : ''}>글내용</option>
+	    		<option value="title" ${partkey=='title' ? 'selected' : ''}>제목</option>
 	    	</select>
 	    </div>
   		<div class="col-6">
-		    <input type="text" name="keyword" id="keyword" class="form-control" />
+		    <input type="text" name="keyword" id="keyword" value="${keyword}" class="form-control" />
 	    </div>
   		<div class="col-3">
-		    <button type="submit" class="btn btn-info form-control">검색</button>
+		    <button type="button" onclick="listSearch()" class="btn btn-info form-control">검색</button>
 	    </div>
 	   </div>
   </form>
+  
 </div>
 <p><br /></p>
 <jsp:include page="/include/footer.jsp" />

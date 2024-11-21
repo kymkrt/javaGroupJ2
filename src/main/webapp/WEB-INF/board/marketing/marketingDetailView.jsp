@@ -57,6 +57,9 @@
 			<td colspan="4">${fn:replace(vo.content, newLine, '<br/>')}</td>
 		</tr>
 	 </table>
+	 <div class="text-center mb-3">
+	 		<button type="button" onclick="goodCheck()" class="btn btn-dark"><font size="3em"><i class="bi bi-hand-thumbs-up-fill"></i></font></button>
+	 </div>
   <div class="row text-center">
   	<c:if test="${sMid == vo.mid || sLevel == 0}">
   		<div class="col"><button type="button" onclick="location.href='MarketingUpdate.board?idx=${vo.idx}'" class="btn btn-warning">수정</button> </div>

@@ -35,7 +35,7 @@
   <script defer>
   	'use script';
   
-  	function loadContent(event) {
+  function loadContent(event) {
   	    if (event) event.preventDefault(); // 링크 기본 동작 막기
   	    const url = event ? event.target.getAttribute('href') : location.hash.substring(1) || 'MyDashBoard.my'; // 클릭한 링크의 href 가져오기 또는 기본 페이지 설정
   	    
@@ -62,6 +62,25 @@
   	  window.addEventListener('popstate', () => {
   	    loadContent(null);
   	  });
+  	  
+  	/* document.addEventListener('DOMContentLoaded', function() {
+        document.body.addEventListener('click', function(event) {
+          const target = event.target.closest('a');
+          if (target && target.getAttribute('href') && !target.getAttribute('href').startsWith('#')) {
+            event.preventDefault();
+            loadContent(target.getAttribute('href'));
+          }
+        });
+      });
+
+      function loadContent(url) {
+        fetch(url)
+          .then(response => response.text())
+          .then(html => {
+            document.getElementById('content').innerHTML = html;
+          })
+          .catch(error => console.error('Error loading content:', error));
+      } */
   	  
 			function fCheck() {
 		

@@ -25,16 +25,16 @@ public class MarketingListCommand implements BoardInterface {
 		int curScrStartNo = totRecCnt - startIndexNo;
 		
 		List<MarketingBoardVO> vos = new ArrayList<>();
-		//List<MarketingBoardVO> vosBest = new ArrayList<>();
+		List<MarketingBoardVO> vosBest = new ArrayList<>();
 		vos = dao.getMarketingList(part, startIndexNo, pageSize);
-		//vosBest = dao.getMonthBestList(part, "marketingboard");
+		vosBest = dao.getMarketingMonthBestList(part, "marketingboard");
 		
 		int blockSize = 5;
 		int curBlock = (pag - 1) / blockSize;
 		int lastBlock = (totPage - 1) / blockSize;
 		
 		request.setAttribute("vos", vos);
-		//request.setAttribute("vosBest", vosBest);
+		request.setAttribute("vosBest", vosBest);
 		request.setAttribute("part", part);
 		
 		request.setAttribute("pag", pag);

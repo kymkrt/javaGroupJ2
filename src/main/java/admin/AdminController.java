@@ -26,23 +26,31 @@ public class AdminController extends HttpServlet{
 
 		if(level != 0) {
 			request.setAttribute("message", "관리자만 사용가능합니다");
-			request.setAttribute("url", "/MemberLogin.mem");
+			request.setAttribute("url", "/MemberLogin.member");
 			viewPage = "/include/message.jsp";
 		}
 		else if(com.equals("/AdminMain")) {
 			viewPage += "/adminMain.jsp"; 
 		}
 		else if(com.equals("/AdminDashBoard")) {
-			System.out.println("대시보드");
 			viewPage += "/adminDashBoard.jsp"; 
 		}
 		else if(com.equals("/AdminMemberControl")) {
+			command = new AdminMemberControl();
+			command.execute(request, response);
 			viewPage += "/adminMemberControl.jsp"; 
+		}
+		else if(com.equals("/AdminMemberDetailControl")) {
+			command = new AdminMemberDetailControl();
+			command.execute(request, response);
+			viewPage += "/adminMemberDetail.jsp"; 
 		}
 		else if(com.equals("/AdminEstimateControl")) {
 			viewPage += "/adminEstimateControl.jsp"; 
 		}
 		else if(com.equals("/AdminBoardControl")) {
+			command = new AdminBoardControl();
+			command.execute(request, response);
 			viewPage += "/adminBoardControl.jsp"; 
 		}
 		else if(com.equals("/AdminMessageControl")) {

@@ -35,7 +35,7 @@ public class BoardController extends HttpServlet{
 		else if(com.equals("/FreeListSearch")) {
 			command = new FreeListSearchCommand();
 			command.execute(request, response);
-			viewPage += "freeboard/freeList.jsp"; 
+			viewPage += "freeboard/freeSearchList.jsp"; 
 		}
 		else if(com.equals("/FreeDetailView")) {
 			command = new FreeDetailViewCommand();
@@ -47,10 +47,10 @@ public class BoardController extends HttpServlet{
 			command.execute(request, response);
 			viewPage += "announcement/announcementList.jsp"; 
 		}
-		else if(com.equals("/AnnouncementSearch")) {
+		else if(com.equals("/AnnouncementListSearch")) {
 			command = new AnnouncementSearchCommand();
 			command.execute(request, response);
-			viewPage += "announcement/announcementList.jsp"; 
+			viewPage += "announcement/announcementSearchList.jsp"; 
 		}
 		else if(com.equals("/AnnouncementDetailView")) {
 			command = new AnnouncementDetailViewCommand();
@@ -65,7 +65,7 @@ public class BoardController extends HttpServlet{
 		else if(com.equals("/MarketingListSearch")) {
 			command = new MarketingListSearchsCommand();
 			command.execute(request, response);
-			viewPage += "marketing/marketingList.jsp"; 
+			viewPage += "marketing/marketingSearchList.jsp"; 
 		}
 		else if(com.equals("/MarketingDetailView")) {
 			command = new MarketingDetailViewCommand();

@@ -59,14 +59,14 @@
   <!--페이지네이션  -->
   <div class="text-center">
   <ul class="pagination justify-content-center">
-	  <c:if test="${pag > 1}"><li class="page-item"><a class="page-link text-secondary" href="AnnouncementList.board?pag=1&pageSize=${pageSize}">첫페이지</a></li></c:if>
-	  <c:if test="${curBlock > 0}"><li class="page-item"><a class="page-link text-secondary" href="AnnouncementList.board?pag=${(curBlock-1)*blockSize + 1}&pageSize=${pageSize}">이전블록</a></li></c:if>
+	  <c:if test="${pag > 1}"><li class="page-item"><a class="page-link text-secondary" href="AnnouncementListSearch.board?pag=1&pageSize=${pageSize}&partkey=${partkey}&keyword=${keyword}">첫페이지</a></li></c:if>
+	  <c:if test="${curBlock > 0}"><li class="page-item"><a class="page-link text-secondary" href="AnnouncementListSearch.board?pag=${(curBlock-1)*blockSize + 1}&pageSize=${pageSize}&partkey=${partkey}&keyword=${keyword}">이전블록</a></li></c:if>
 	  <c:forEach var="i" begin="${(curBlock*blockSize)+1}" end="${(curBlock*blockSize) + blockSize}" varStatus="st">
-	    <c:if test="${i <= totPage && i == pag}"><li class="page-item active"><a class="page-link bg-secondary border-secondary" href="AnnouncementList.board?pag=${i}&pageSize=${pageSize}">${i}</a></li></c:if>
-	    <c:if test="${i <= totPage && i != pag}"><li class="page-item"><a class="page-link text-secondary" href="AnnouncementList.board?pag=${i}&pageSize=${pageSize}">${i}</a></li></c:if>
+	    <c:if test="${i <= totPage && i == pag}"><li class="page-item active"><a class="page-link bg-secondary border-secondary" href="AnnouncementListSearch.board?pag=${i}&pageSize=${pageSize}&partkey=${partkey}&keyword=${keyword}">${i}</a></li></c:if>
+	    <c:if test="${i <= totPage && i != pag}"><li class="page-item"><a class="page-link text-secondary" href="AnnouncementListSearch.board?pag=${i}&pageSize=${pageSize}&partkey=${partkey}&keyword=${keyword}">${i}</a></li></c:if>
 	  </c:forEach>
-	  <c:if test="${curBlock < lastBlock}"><li class="page-item"><a class="page-link text-secondary" href="AnnouncementList.board?pag=${(curBlock+1)*blockSize+1}&pageSize=${pageSize}">다음블록</a></li></c:if>
-	  <c:if test="${pag < totPage}"><li class="page-item"><a class="page-link text-secondary" href="AnnouncementList.board?pag=${totPage}&pageSize=${pageSize}">마지막페이지</a></li></c:if>
+	  <c:if test="${curBlock < lastBlock}"><li class="page-item"><a class="page-link text-secondary" href="AnnouncementListSearch.board?pag=${(curBlock+1)*blockSize+1}&pageSize=${pageSize}&partkey=${partkey}&keyword=${keyword}">다음블록</a></li></c:if>
+	  <c:if test="${pag < totPage}"><li class="page-item"><a class="page-link text-secondary" href="AnnouncementListSearch.board?pag=${totPage}&pageSize=${pageSize}&partkey=${partkey}&keyword=${keyword}">마지막페이지</a></li></c:if>
   </ul>
 	</div>
 	<c:if test="${!empty sLevel && sLevel == 0}">
@@ -79,12 +79,12 @@
   	<div class="row">
   		<div class="col-3">
 	    	<select name="partkey" id="partkey" class="form-control">
-	    		<option value="content" selected>글내용</option>
-	    		<option value="title">제목</option>
+	    		<option value="content" ${partkey=='content' ? 'selected' : ''}>글내용</option>
+	    		<option value="title" ${partkey=='title' ? 'selected' : ''}>제목</option>
 	    	</select>
 	    </div>
   		<div class="col-6">
-		    <input type="text" name="keyword" id="keyword" class="form-control" />
+		    <input type="text" name="keyword" id="keyword" value="${keyword}" class="form-control" />
 	    </div>
   		<div class="col-3">
 		    <button type="button" onclick="listSearch()" class="btn btn-info form-control">검색</button>
