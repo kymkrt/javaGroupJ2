@@ -10,6 +10,21 @@
   <script type="text/javascript">
   	'use strict';
   	
+  	function setCookie() {
+  		let mid = loginForm.mid.value;
+  		
+	   $.ajax({
+	       url: '/setCookieServlet', // 쿠키를 설정하는 서블릿 URL
+	       type: 'POST',
+	       data: { name: 'cMid', value: ""+mid }, // 전송할 데이터
+	       success: function () {
+	           alert('쿠키가 설정되었습니다.');
+	       },
+	       error: function () {
+	           alert('쿠키 설정에 실패했습니다.');
+	       }
+	   });
+  	}
   	
   </script>
   <style type="text/css">
@@ -47,7 +62,7 @@
 		  	<button type="reset" class="btn btn-warning mb-3">다시 작성</button><br/>
 		  </div>
 		  <div class="col">
-		  	<button type="button" data-toggle="button" class="btn btn-outline-dark btn-sm mb-3">아이디 기억</button><br/>
+		  	<button type="button" onclick="setCookie()" data-toggle="button" class="btn btn-outline-dark btn-sm mb-3">아이디 기억</button><br/>
 		  </div>
 	  </div>
 	  <button type="button" onclick="location.href='IdpasswordSearch.member'" class="btn btn-primary btn-sm">아이디/비밀번호찾기</button>

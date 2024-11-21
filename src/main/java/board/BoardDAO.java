@@ -40,10 +40,11 @@ public class BoardDAO {
 	public int getTotRecCnt(int level, String table) {
 		int totRecCnt = 0; //그냥 res 써도됨
 		try {
-			if(level == 999) {
-				sql = "select count(idx) as totRecCnt from "+table+" where claim = 'NO'";//as 뒤는 변수명이라 마음대로 줘도 됨
+			if(table.equals("announcementboard")) {
+				sql = "select count(idx) as totRecCnt from "+table;//as 뒤는 변수명이라 마음대로 줘도 됨
+			}else {
+				sql = "select count(idx) as totRecCnt from "+table+" where claim = 'NO'";
 			}
-			sql = "select count(idx) as totRecCnt from "+table+" where claim = 'NO'";
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			

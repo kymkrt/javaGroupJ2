@@ -38,6 +38,7 @@
 <jsp:include page="/include/nav.jsp" />
 <p><br /></p>
 <div class="container">
+<h3>공 지 게 시 판</h3>
   <table class="table table-bordered table-hover text-center">
  		<tr class="table table-secondary">
  			<th>번호</th>
