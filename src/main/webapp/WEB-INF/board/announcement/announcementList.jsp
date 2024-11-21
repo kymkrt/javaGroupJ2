@@ -34,8 +34,8 @@
 <jsp:include page="/include/nav.jsp" />
 <p><br /></p>
 <div class="container">
-  <table>
- 		<tr>
+  <table class="table table-bordered table-hover text-center">
+ 		<tr class="table table-secondary">
  			<th>번호</th>
  			<th>제목</th>
  			<th>작성자</th>
@@ -65,7 +65,7 @@
 	  <c:if test="${pag < totPage}"><li class="page-item"><a class="page-link text-secondary" href="AnnouncementList.board?pag=${totPage}&pageSize=${pageSize}">마지막페이지</a></li></c:if>
   </ul>
 	</div>
-	<c:if test="${!empty sLevel}">
+	<c:if test="${!empty sLevel && sLevel == 0}">
 		<div class="text-right">
 			<button type="button" onclick="location.href='AnnouncementInput.board'" class="btn btn-primary mb-3">글쓰기</button>
 		</div>
@@ -81,7 +81,7 @@
 	    	</select>
 	    </div>
   		<div class="col-6">
-		    <input type="text" name="key" class="form-control" />
+		    <input type="text" name="keyword" class="form-control" />
 	    </div>
   		<div class="col-3">
 		    <button type="submit" class="btn btn-info form-control">검색</button>

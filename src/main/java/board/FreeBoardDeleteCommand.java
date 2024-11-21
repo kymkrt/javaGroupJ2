@@ -15,11 +15,11 @@ public class FreeBoardDeleteCommand implements BoardInterface {
 		
 		BoardDAO dao = new BoardDAO();
 		
-		int res = dao.freeBoardDeleteOk(idx);
+		int res = dao.setfreeBoardDeleteOk(idx);
 		
 		if(res != 0) {
 			request.setAttribute("message", "자유게시판에 글이 삭제되셨습니다");
-			request.setAttribute("url", "/FreeBoardList.board"); //확장자패턴
+			request.setAttribute("url", "/FreeList.board"); //확장자패턴
 		}else {
 			request.setAttribute("message", "자유게시판 글 삭제 실패");
 			request.setAttribute("url", "/FreeDetailView.board?idx="+idx); //확장자패턴 쿼리스트링변수

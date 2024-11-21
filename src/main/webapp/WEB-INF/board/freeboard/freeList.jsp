@@ -8,6 +8,7 @@
   <meta charset="UTF-8">
   <title>freeList.jsp</title>
   <jsp:include page="/include/bs4.jsp" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <style type="text/css">
  	 .part{
  	 		color: black;
@@ -32,11 +33,10 @@
   </script>
 </head>
 <body>
-<jsp:include page="/include/header.jsp" />
 <jsp:include page="/include/nav.jsp" />
 <p><br /></p>
 <div class="container">
-  <div class="row partList border">
+  <div class="row partList border mb-3">
   	<c:if test="${part=='all'}">
 	  	<div class="col">
 	  		<b><a href="FreeList.board?part=all" class="part all">전체</a></b>
@@ -79,12 +79,12 @@
   	</c:if>
   	<c:if test="${part =='plant'}">
 	  	<div class="col">
-	  		<b><a href="FreeList.board?part=plant" class="part plant">식쇼</a></b>
+	  		<b><a href="FreeList.board?part=plant" class="part plant">식물</a></b>
 	  	</div>
   	</c:if>
   	<c:if test="${part !='plant'}">
 	  	<div class="col">
-	  		<a href="FreeList.board?part=plant" class="part plant">식쇼</a>
+	  		<a href="FreeList.board?part=plant" class="part plant">식물</a>
 	  	</div>
   	</c:if>
   	<c:if test="${part =='review'}">
@@ -111,7 +111,9 @@
 	  	</tr>
 	  	<c:forEach var="vo" items="${vosBest}" varStatus="st">
 		  	<tr>
-		  		<td><a href="FreeDetailView.board?idx=${vo.idx}">${vo.title }</a></td>
+		  		<td><a href="FreeDetailView.board?idx=${vo.idx}">${vo.title }</a>
+		  		&nbsp;<i class="bi bi-caret-up-fill"></i>${vo.viewCnt}
+		  		&nbsp;<i class="bi bi-hand-thumbs-up-fill"></i>${vo.good}</td>
 		  	</tr>
 	  	</c:forEach>
 		  	<tr>
@@ -121,11 +123,6 @@
 		  	</tr>
 	  </table>
 	</div>
-	<c:if test="${!empty sMid}">
-		<div class="text-right">
-			<button type="button" onclick="location.href='FreeBoardInput.board'" class="btn btn-success mb-3">글작성</button>
-		</div>
-	</c:if>
   <table class="table table-bordered table-hover">
  		<tr class="table-dark">
  			<th>번호</th>
@@ -177,7 +174,7 @@
 	    	</select>
 	    </div>
   		<div class="col-6">
-		    <input type="text" name="key" class="form-control" />
+		    <input type="text" name="keyword" class="form-control" />
 	    </div>
   		<div class="col-3">
 		    <button type="submit" class="btn btn-info form-control">검색</button>

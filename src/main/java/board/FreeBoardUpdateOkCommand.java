@@ -6,11 +6,12 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class FreeBoardInputOkCommand implements BoardInterface {
+public class FreeBoardUpdateOkCommand implements BoardInterface {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		
+		int idx = (request.getParameter("idx")==null) || (request.getParameter("idx").equals("")) ? 0 : Integer.parseInt(request.getParameter("idx"));
 		String mid = request.getParameter("mid")==null ? "" : request.getParameter("mid");
 		String nickName = request.getParameter("nickName")==null ? "" : request.getParameter("nickName");
 		String title = request.getParameter("title")==null ? "" : request.getParameter("title");
@@ -21,6 +22,7 @@ public class FreeBoardInputOkCommand implements BoardInterface {
 		
 		title = title.replace("<", "&lt;").replace(">", "&gt;");
 		
+		
 		FreeBoardVO vo = new FreeBoardVO();
 		
 		vo.setMid(mid);
@@ -30,17 +32,18 @@ public class FreeBoardInputOkCommand implements BoardInterface {
 		vo.setContent(content);
 		vo.setHostIp(hostIp);
 		vo.setOpenSw(openSw);
+		vo.setIdx(idx);
 		
 		BoardDAO dao = new BoardDAO();
 		
-		int res = dao.setFreeBoardInputOk(vo);
+		int res = dao.setFreeBoardUpdateOk(vo);
 		
 		if(res != 0) {
-			request.setAttribute("message", "자유게시판에 글이 등록되셨습니다");
-			request.setAttribute("url", "/FreeList.board"); //확장자패턴
+			request.setAttribute("message", "자유게시판에 글이 수정되셨습니다");
+			request.setAttribute("url", "/FreeDetailView.board?idx="+idx); //확장자패턴
 		}else {
-			request.setAttribute("message", "자유게시판에 글 등록 실패");
-			request.setAttribute("url", "/FreeBoardInput.board"); //확장자패턴
+			request.setAttribute("message", "자유게시판에 글 수정 실패");
+			request.setAttribute("url", "/FreeBoardUpdate.board?idx="+idx); //확장자패턴
 		}
 	}
 

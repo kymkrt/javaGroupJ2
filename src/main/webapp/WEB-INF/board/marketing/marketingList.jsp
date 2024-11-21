@@ -24,11 +24,10 @@
   </style>
 </head>
 <body>
-<jsp:include page="/include/header.jsp" />
 <jsp:include page="/include/nav.jsp" />
 <p><br /></p>
 <div class="container">
-    <div class="row partList border">
+    <div class="row partList border mb-3">
   	<c:if test="${part=='all'}">
 	  	<div class="col">
 	  		<b><a href="MarketingList.board?part=all" class="part all">전체</a></b>
@@ -93,7 +92,7 @@
 	  	</tr>
 	  	<c:forEach var="vo" items="${vosBest}" varStatus="st">
 		  	<tr>
-		  		<td><a href="FreeDetailView.board?idx=${vo.idx}">${vo.title }</a></td>
+		  		<td><a href="MarketingDetailView.board?idx=${vo.idx}">${vo.title }</a></td>
 		  	</tr>
 	  	</c:forEach>
 		  	<tr>
@@ -103,11 +102,6 @@
 		  	</tr>
 	  </table>
 	</div> --%>
-	<c:if test="${!empty sMid}">
-		<div class="text-right">
-			<button type="button" onclick="location.href='FreeBoardInput.board'" class="btn btn-success mb-3">글작성</button>
-		</div>
-	</c:if>
   <table class="table table-bordered table-hover">
  		<tr class="table-dark">
  			<th>번호</th>
@@ -145,7 +139,7 @@
 	</div>
 	<c:if test="${!empty sLevel}">
 		<div class="text-right">
-			<button type="button" onclick="location.href='FreeBoardInput.board'" class="btn btn-primary mb-3">글쓰기</button>
+			<button type="button" onclick="location.href='MarketingInput.board'" class="btn btn-primary mb-3">글쓰기</button>
 		</div>
 	</c:if>
   <!--검색-->
@@ -159,7 +153,7 @@
 	    	</select>
 	    </div>
   		<div class="col-6">
-		    <input type="text" name="key" class="form-control" />
+		    <input type="text" name="keyword" class="form-control" />
 	    </div>
   		<div class="col-3">
 		    <button type="submit" class="btn btn-info form-control">검색</button>

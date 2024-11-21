@@ -88,7 +88,12 @@ public class BoardController extends HttpServlet{
 		else if(com.equals("/FreeBoardUpdate")) {
 			command = new FreeBoardUpdateCommand();
 			command.execute(request, response);
-			viewPage ="/include/message.jsp"; 
+			viewPage += "freeboard/freeBoardUpdate.jsp"; 
+		}
+		else if(com.equals("/FreeBoardUpdateOk")) {
+			command = new FreeBoardUpdateOkCommand();
+			command.execute(request, response);
+			viewPage ="/include/message.jsp";  
 		}
 		else if(com.equals("/FreeBoardDelete")) {
 			command = new FreeBoardDeleteCommand();
@@ -106,7 +111,12 @@ public class BoardController extends HttpServlet{
 		else if(com.equals("/MarketingUpdate")) {
 			command = new MarketingUpdateCommand();
 			command.execute(request, response);
-			viewPage ="/include/message.jsp"; 
+			viewPage += "marketing/marketingBoardUpdate.jsp"; 
+		}
+		else if(com.equals("/MarketingUpdateOk")) {
+			command = new MarketingUpdateOkCommand();
+			command.execute(request, response);
+			viewPage ="/include/message.jsp";  
 		}
 		else if(com.equals("/MarketingDelete")) {
 			command = new MarketingDeleteCommand();
@@ -115,7 +125,7 @@ public class BoardController extends HttpServlet{
 		}
 		else if (level != 0) {
 			 request.setAttribute("message", "관리자만 사용할수 있습니다");
-			 request.setAttribute("url", "/MyPageMain.my");
+			 request.setAttribute("url", "/MyPage");
 			 viewPage ="/include/message.jsp"; 
 			}
 		else if(com.equals("/AnnouncementInput")) {
@@ -128,6 +138,11 @@ public class BoardController extends HttpServlet{
 		}
 		else if(com.equals("/AnnouncementUpdate")) {
 			command = new AnnouncementUpdateCommand();
+			command.execute(request, response);
+			viewPage += "announcement/announcementBoardUpdate.jsp";
+		}
+		else if(com.equals("/AnnouncementUpdateOk")) {
+			command = new AnnouncementUpdateOkCommand();
 			command.execute(request, response);
 			viewPage ="/include/message.jsp"; 
 		}

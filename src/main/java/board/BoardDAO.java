@@ -36,16 +36,62 @@ public class BoardDAO {
 		}
 	}
 
+	//총 글수 구하기
+	public int getTotRecCnt(int level, String table) {
+		int totRecCnt = 0; //그냥 res 써도됨
+		try {
+			if(level == 999) {
+				sql = "select count(idx) as totRecCnt from "+table+" where claim = 'NO'";//as 뒤는 변수명이라 마음대로 줘도 됨
+			}
+			if(table.equals("announcementboard")) {
+				sql = "select count(idx) as totRecCnt from "+table;
+			}
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			rs.next();
+			totRecCnt = rs.getInt("totRecCnt");
+		} catch (Exception e) {
+			System.out.println("sql오류(getTotRecCnt) "+e.getMessage());
+		}finally {
+			rsClose();
+		}
+		return totRecCnt;
+	}
+	
+	//조회수 증가
+	public int setViewCntPlus(String board, int idx) {
+		int res = 0;
+		try {
+			sql="update "+board+" set viewCnt=viewCnt+1 where idx=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, idx);
+			res = pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			System.out.println("sql오류(setViewCntPlus) : "+e.getMessage());
+		}finally {
+			pstmtClose();
+		}
+		return res;
+	}
+	
 	//자유게시판 보드리스트 보기
 	public List<FreeBoardVO> getFreeBoardList(String part, int startIndexNo, int pageSize) {
 		List<FreeBoardVO> vos =  new ArrayList<>();
 		try {
-			sql = "select * from freeboard where part = ? and claim = 'NO' order by idx desc limit ?,?";
-			pstmt = conn.prepareStatement(sql);
-			
-			pstmt.setString(1, part);
-			pstmt.setInt(2, startIndexNo);
-			pstmt.setInt(3, pageSize);
+			if(part.equals("all")) {
+				sql = "select * from freeboard where claim = 'NO' order by idx desc limit ?,?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, startIndexNo);
+				pstmt.setInt(2, pageSize);
+			}else {
+				sql = "select * from freeboard where part = ? and claim = 'NO' order by idx desc limit ?,?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, part);
+				pstmt.setInt(2, startIndexNo);
+				pstmt.setInt(3, pageSize);
+			}
 			
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
@@ -76,34 +122,11 @@ public class BoardDAO {
 		return vos;
 	}
 	
-	//총 글수 구하기
-	public int getTotRecCnt(int level, String table) {
-		int totRecCnt = 0; //그냥 res 써도됨
-		try {
-			if(level == 999) {
-				sql = "select count(idx) as totRecCnt from "+table+" where claim = 'NO'";//as 뒤는 변수명이라 마음대로 줘도 됨
-			}
-			if(table.equals("announcementboard")) {
-				sql = "select count(idx) as totRecCnt from "+table;
-			}
-			pstmt = conn.prepareStatement(sql);
-			rs = pstmt.executeQuery();
-			
-			rs.next();
-			totRecCnt = rs.getInt("totRecCnt");
-		} catch (Exception e) {
-			System.out.println("sql오류(getTotRecCnt) "+e.getMessage());
-		}finally {
-			rsClose();
-		}
-		return totRecCnt;
-	}
-
 	//자유게판 베스트 리스트
 	public List<FreeBoardVO> getMonthBestList(String part, String table) {
 		List<FreeBoardVO> vosBest = new ArrayList<>();
 		try {
-			sql = "select * from "+table+" WHERE wDate >= DATE_SUB(CURDATE(), INTERVAL 1 MONTH) and claim = 'NO' ORDER BY viewCnt DESC, wDate DESC "
+			sql = "select * from "+table+" WHERE wDate >= DATE_SUB(CURDATE(), INTERVAL 1 MONTH) and claim = 'NO' ORDER BY viewCnt DESC, good desc, wDate DESC "
 					+ "LIMIT 3";
 			pstmt = conn.prepareStatement(sql);
 			
@@ -165,6 +188,7 @@ public class BoardDAO {
 				vo.setPart(rs.getString("part"));
 				vo.setContent(rs.getString("content"));
 				vo.setHostIp(rs.getString("hostIp"));
+				vo.setViewCnt(rs.getInt("viewCnt"));
 				vo.setOpenSw(rs.getString("openSw"));
 				vo.setwDate(rs.getString("wDate"));
 				vo.setClaim(rs.getString("claim"));
@@ -185,7 +209,7 @@ public class BoardDAO {
 	public int setFreeBoardInputOk(FreeBoardVO vo) {
 		int res = 0;	
 		try {
-			sql = "insert into freeboard values (default, ?, ?, ?, ?, ?, ?,default,default,default,default,default,default)"; //s를 생략해도 값은 들어가지만 필수로 넣어야 한다 공통 sQL
+			sql = "insert into freeboard values (default, ?, ?, ?, ?, ?, ?,?,default,default,default,default,default)"; //s를 생략해도 값은 들어가지만 필수로 넣어야 한다 공통 sQL
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, vo.getMid());
 			pstmt.setString(2, vo.getNickName());
@@ -193,6 +217,7 @@ public class BoardDAO {
 			pstmt.setString(4, vo.getPart());
 			pstmt.setString(5, vo.getContent());
 			pstmt.setString(6, vo.getHostIp());
+			pstmt.setString(7, vo.getOpenSw());
 			
 			res = pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -204,22 +229,23 @@ public class BoardDAO {
 	}
 
 	//자유 게시판 글 수정
-	public int setBoardUpdateOk(FreeBoardVO vo) {
+	public int setFreeBoardUpdateOk(FreeBoardVO vo) {
 		int res = 0;
 		try {
-			sql="update freeboard set nickName=?, title=?, content=?, hostIp=?,part=? wDate=now() where idx = ?";
+			sql="update freeboard set nickName=?, title=?, content=?, hostIp=?,part=?, openSw=?, wDate=now() where idx = ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, vo.getNickName());
 			pstmt.setString(2, vo.getTitle());
 			pstmt.setString(3, vo.getContent());
 			pstmt.setString(4, vo.getHostIp());
 			pstmt.setString(5, vo.getPart());
-			pstmt.setInt(6, vo.getIdx());
+			pstmt.setString(6, vo.getOpenSw());
+			pstmt.setInt(7, vo.getIdx());
 			
 			res = pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
-			System.out.println("sql오류(setBoardUpdateOk) "+e.getMessage());
+			System.out.println("sql오류(setFreeBoardUpdateOk) "+e.getMessage());
 		} finally {
 			pstmtClose();
 		}
@@ -227,7 +253,7 @@ public class BoardDAO {
 	}
 
 	//자유게시판 글 삭제
-	public int freeBoardDeleteOk(int idx) {
+	public int setfreeBoardDeleteOk(int idx) {
 	int res = 0;
 		
 		try {
@@ -283,7 +309,7 @@ public class BoardDAO {
 		AnnoBoardVO vo = new AnnoBoardVO();
 		
 		try {
-			sql = "select * from freeboard where idx =?";
+			sql = "select * from announcementboard where idx =?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, idx);
 			rs = pstmt.executeQuery();
@@ -307,16 +333,22 @@ public class BoardDAO {
 		return vo;
 	}
 
-	//마케팅 보드 리스트
+	//마케팅 홍보 보드 리스트
 	public List<MarketingBoardVO> getMarketingList(String part, int startIndexNo, int pageSize) {
 		List<MarketingBoardVO> vos =  new ArrayList<>();
 		try {
-			sql = "select * from marketingboard where part = ? and claim = 'NO' order by idx desc limit ?,?";
-			pstmt = conn.prepareStatement(sql);
-			
-			pstmt.setString(1, part);
-			pstmt.setInt(2, startIndexNo);
-			pstmt.setInt(3, pageSize);
+			if(part.equals("all")) {
+				sql = "select * from marketingboard where claim = 'NO' order by idx desc limit ?,?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, startIndexNo);
+				pstmt.setInt(2, pageSize);
+			}else {
+				sql = "select * from marketingboard where part = ? and claim = 'NO' order by idx desc limit ?,?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, part);
+				pstmt.setInt(2, startIndexNo);
+				pstmt.setInt(3, pageSize);
+			}
 			
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
@@ -380,11 +412,11 @@ public class BoardDAO {
 		return vo;
 	}
 
-	//홍보게시판에 글작성
+	//홍보게시판에 글작성 글쓰기
 	public int setMarketingBoardInputOk(MarketingBoardVO vo) {
 		int res = 0;	
 		try {
-			sql = "insert into marketingboard values (default, ?, ?, ?, ?, ?, ?,default,default,default,default,default,default)"; //s를 생략해도 값은 들어가지만 필수로 넣어야 한다 공통 sQL
+			sql = "insert into marketingboard values (default, ?, ?, ?, ?, ?, ?,?,default,default,default,default,default)"; //s를 생략해도 값은 들어가지만 필수로 넣어야 한다 공통 sQL
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, vo.getMid());
 			pstmt.setString(2, vo.getNickName());
@@ -392,6 +424,7 @@ public class BoardDAO {
 			pstmt.setString(4, vo.getPart());
 			pstmt.setString(5, vo.getContent());
 			pstmt.setString(6, vo.getHostIp());
+			pstmt.setString(7, vo.getOpenSw());
 			
 			res = pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -406,14 +439,15 @@ public class BoardDAO {
 	public int setMarketingUpdateOk(MarketingBoardVO vo) {
 		int res = 0;
 		try {
-			sql="update marketingboard set nickName=?, title=?, content=?, hostIp=?,part=? wDate=now() where idx = ?";
+			sql="update marketingboard set nickName=?, title=?, content=?, hostIp=?,part=?,openSw=?, wDate=now() where idx = ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, vo.getNickName());
 			pstmt.setString(2, vo.getTitle());
 			pstmt.setString(3, vo.getContent());
 			pstmt.setString(4, vo.getHostIp());
 			pstmt.setString(5, vo.getPart());
-			pstmt.setInt(6, vo.getIdx());
+			pstmt.setString(6, vo.getOpenSw());
+			pstmt.setInt(7, vo.getIdx());
 			
 			res = pstmt.executeUpdate();
 			

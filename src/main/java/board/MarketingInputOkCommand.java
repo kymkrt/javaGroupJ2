@@ -14,10 +14,10 @@ public class MarketingInputOkCommand implements BoardInterface {
 		String mid = request.getParameter("mid")==null ? "" : request.getParameter("mid");
 		String nickName = request.getParameter("nickName")==null ? "" : request.getParameter("nickName");
 		String title = request.getParameter("title")==null ? "" : request.getParameter("title");
-		String part = request.getParameter("part")==null ? "" : request.getParameter("part");
+		String part = request.getParameter("part")==null ? "etc" : request.getParameter("part");
 		String content = request.getParameter("content")==null ? "" : request.getParameter("content");
-		String hostIp = request.getParameter("hostIp")==null ? "" : request.getParameter("hostIp");
-		String openSw = request.getParameter("openSw")==null ? "" : request.getParameter("openSw");
+		String hostIp = request.getParameter("hostIp")==null ? "자료없음" : request.getParameter("hostIp");
+		String openSw = request.getParameter("openSw")==null ? "공개" : request.getParameter("openSw");
 		
 		title = title.replace("<", "&lt;").replace(">", "&gt;");
 		
