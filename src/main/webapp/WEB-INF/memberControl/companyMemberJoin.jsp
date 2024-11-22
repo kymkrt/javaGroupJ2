@@ -76,6 +76,23 @@
 				return false;
 			}
 			
+			let fName = document.getElementById("file").value;
+			let maxSize = 1024*1024*10; //저장파일의 최대용량을 10MByte까지로 제한 
+			let ext = fName.substring(fName.lastIndexOf(".")+1).toLowerCase(); //.다음부터 찾아야 해서 +1
+			
+			let fileSize = document.getElementById("file").files[0].size;
+			
+			if(fileSize > maxSize){
+				alert("업로드할 파일의 최대용량은 10MB 입니다")
+				return false;
+			}
+			
+			// 안되는거 목록이면 확장자가 너무 많아서 안된다  되는거로 생각해야됨
+			else if(ext != 'jpg' && ext != 'png' && ext != 'gif'){
+				alert("업로드 가능한 파일은 'jpg/png/gif'만 가능합니다");
+				return false;
+			}
+			
   		myform.action = "MemberJoinOk.member";
   		myform.submit();
 		}
@@ -160,7 +177,7 @@
                 if(extraRoadAddr !== ''){
                     extraRoadAddr = ' (' + extraRoadAddr + ')';
                 }
-
+								
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
                 document.getElementById('sample4_postcode').value = data.zonecode;
                 document.getElementById("sample4_roadAddress").value = roadAddr;
@@ -199,7 +216,7 @@
 <p><br /></p>
 <div class="container">
 	<h4 class="text-center">사업자회원가입</h4>
-	<form name="myform" onsubmit="return formCheck()">
+	<form name="myform" method="post" onsubmit="return formCheck()" enctype="multipart/form-data">
 	  <div class="box border">
 			<div class="row mb-4 mid">
 				<div class="col-4">
@@ -305,6 +322,17 @@
 					<input 
 						type="tel" name="telSub" pattern="[0-9]{2,3}[0-9]{3,4}[0-9]{4}"
 						placeholder="-는 생략하고 입력해주세요" class="form-control"
+					/>
+				</div>	
+			</div>
+			<div class="row mb-4">
+				<div class="col-4">
+					사진
+				</div>
+				<div class="col-8">
+					<input 
+						type="file" name="fName" id="file"
+						class="form-control-file"
 					/>
 				</div>	
 			</div>

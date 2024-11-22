@@ -155,7 +155,7 @@
 <body>
 <p><br /></p>
 <div class="container">
-	<form name="myform" id="myform">
+	<form name="myform" id="myform" method="post" enctype="multipart/form-data">
 	  <h1 class="text-center mb-3">내 정보 수정하기</h1>
 	  <table class="table table-bordered table-hover text-center">
 			<tr>
@@ -248,7 +248,13 @@
 			</tr>  
 			<tr>
 				<th>사진</th>
-				<td><input type="text" name="photo" id="photo" value="${vo.photo}" class="form-control" readonly />${vo.photo}</td>
+				<td>
+					<img alt="자기소개 사진" src="${ctp}${vo.photo}" style="max-width: 400px; height: 400px;" />
+					<input 
+						type="file" name="fName" id="file"
+						class="form-control-file"
+					/>
+				</td>
 			</tr>  
 			<tr>
 				<th>광고허용여부</th>

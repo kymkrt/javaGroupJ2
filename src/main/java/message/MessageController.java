@@ -10,18 +10,97 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import admin.AdminAllMessageControl;
+import admin.AdminMessageSearchControl;
+
 @WebServlet("*.msg")
 public class MessageController extends HttpServlet{
 
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String viewPage = "/WEB-INF/";
+		MessageInterface command = null;
+		
+		String viewPage = "/WEB-INF";
 		String com = request.getRequestURI();
 		com = com.substring(com.lastIndexOf("/"), com.lastIndexOf("."));
 		
 		HttpSession session = request.getSession();
 		int level = session.getAttribute("sLevel")==null ? 999 : (int)session.getAttribute("sLevel");
+		
+		if(level != 0 || level > 4) {
+			request.setAttribute("message", "회원만 사용가능합니다");
+			request.setAttribute("url", "/MemberLogin.member");
+			viewPage = "/include/message.jsp";
+		}
+		else if(com.equals("/MessageSend")) {
+			viewPage += "/myPage/messageSend.jsp";
+		}
+		else if(com.equals("/MessageSendOk")) {
+			command = new MessageSendOk();
+			command.execute(request, response);
+			viewPage = "/include/message.jsp"; 
+		}
+		else if(com.equals("/MyMessageControl")) {
+			command = new MyMessageControl();
+			command.execute(request, response);
+			viewPage += "/myPage/myMessage.jsp"; 
+		}
+		else if(com.equals("/MyAllSendMessageControl")) {
+			command = new MyAllSendMessageControl();
+			command.execute(request, response);
+			viewPage += "/myPage/myAllSendMessage.jsp"; 
+		}
+		else if(com.equals("/MyAllReceMessageControl")) {
+			command = new MyAllReceMessageControl();
+			command.execute(request, response);
+			viewPage += "/myPage/myAllReceMessage.jsp"; 
+		}
+		else if(com.equals("/MyAllMessageControl")) {
+			command = new MyAllMessageControl();
+			command.execute(request, response);
+			viewPage += "/myPage/myAllMessage.jsp"; 
+		}
+		else if(com.equals("/MyMessageSearchControl")) {
+			command = new MyMessageSearchControl();
+			command.execute(request, response);
+			viewPage += "/myPage/mySearchMessage.jsp"; 
+		}
+		else if(level != 0) {
+			request.setAttribute("message", "관리자만 사용가능합니다");
+			request.setAttribute("url", "/MainPage");
+			viewPage = "/include/message.jsp";
+		}
+		else if(com.equals("/AdminMessageControl")) {
+			command = new AdminMessageControl();
+			command.execute(request, response);
+			viewPage += "/admin/adminMessageControl.jsp"; 
+		}
+		else if(com.equals("/AdminOfReceMessageControl")) {
+			command = new AdminOfReceMessageControl();
+			command.execute(request, response);
+			viewPage += "/admin/adminOfAllMessageControl.jsp"; 
+		}
+		else if(com.equals("/AdminOfSendMessageControl")) {
+			command = new AdminOfSendMessageControl();
+			command.execute(request, response);
+			viewPage += "/admin/adminOfAllMessageControl.jsp"; 
+		}
+		else if(com.equals("/AdminOfAllMessageControl")) {
+			command = new AdminOfAllMessageControl();
+			command.execute(request, response);
+			viewPage += "/admin/adminAllMessageControl.jsp"; 
+		}
+		else if(com.equals("/AdminAllMessageControl")) {
+			command = new AdminAllMessageControl();
+			command.execute(request, response);
+			viewPage += "/admin/adminAllMessageControl.jsp"; 
+		}
+		else if(com.equals("/AdminMessageSearchControl")) {
+			command = new AdminMessageSearchControl();
+			command.execute(request, response);
+			viewPage += "/admin/adminMessageControl.jsp"; 
+		}
 		
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher(viewPage);
 		requestDispatcher.forward(request, response);

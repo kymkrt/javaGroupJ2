@@ -241,7 +241,7 @@ public class MemberDAO {
 				pstmt.setString(15, vo.getMemoryMid());
 			}
 			else if(vo.getUserType().trim().equals("사업자")) {
-				sql = "insert into javagroup2.member values(default,?,?,?,?,?,?,?,?,?,?,?,?,'사업자',?,?,?,?,"
+				sql = "insert into member values(default,?,?,?,?,?,?,?,?,?,?,?,?,'사업자',?,?,?,?,"
 						+ "default,2,default,default,default,default,default,?)";
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setString(1, vo.getMid());
@@ -302,7 +302,7 @@ public class MemberDAO {
 	public MemberVO getMemberInfo(String mid) {
 		MemberVO vo = new MemberVO();
 		try {
-			sql="select * from member where mid = ?";
+			sql="select * from javagroup2.member where mid = ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, mid);
 			rs = pstmt.executeQuery();

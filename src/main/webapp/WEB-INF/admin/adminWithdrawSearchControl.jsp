@@ -5,15 +5,14 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>adminWithdrawControl.jsp</title>
+  <title>adminWithdrawSearchControl.jsp</title>
   <jsp:include page="/include/bs4.jsp" />
 </head>
 <body>
 <jsp:include page="/include/header.jsp" />
-<jsp:include page="/include/nav.jsp" />
 <p><br /></p>
 <div class="container">
-  <h3 class="mb-2">탈 퇴 신 청 회 원 관 리</h3>
+  <h3 class="mb-2">검 색 탈 퇴 신 청 회 원 관 리</h3>
   <table class="table table-hover text-center mb-3">
   	<tr>
   		<th>고유번호(idx)</th>
@@ -28,7 +27,7 @@
   	</tr>
   	<c:if test="${empty vos}">
   		<tr>
-  			<td colspan="9">탈퇴 신청 회원 없음</td>
+  			<td colspan="9">검색된 탈퇴 신청 회원 없음</td>
   		</tr>
   	</c:if>
   	<c:if test="${!empty vos}">
@@ -51,16 +50,16 @@
   	<div class="row">
   		<div class="col-3">
 	    	<select name="partkey" id="partkey" class="form-control">
-	    		<option value="memoryMid" selected>저장아이디</option>
-	    		<option value="nickName">닉네임</option>
-	    		<option value="name">이름</option>
-	    		<option value="email">이메일</option>
-	    		<option value="telMain">연락처</option>
-	    		<option value="companyName">회사명</option>
+	    		<option value="memoryMid" ${partkey=='memoryMid' ? 'selected' : ''}>저장아이디</option>
+	    		<option value="nickName" ${partkey=='nickName' ? 'selected' : ''}>닉네임</option>
+	    		<option value="name" ${partkey=='name' ? 'selected' : ''}>이름</option>
+	    		<option value="email" ${partkey=='email' ? 'selected' : ''}>이메일</option>
+	    		<option value="telMain" ${partkey=='telMain' ? 'selected' : ''}>연락처</option>
+	    		<option value="companyName" ${partkey=='companyName' ? 'selected' : ''}>회사명</option>
 	    	</select>
 	    </div>
   		<div class="col-6">
-		    <input type="text" name="keyword" id="keyword" placeholder="-없이 입력해주세요" class="form-control" />
+		    <input type="text" name="keyword" id="keyword" value="${keyword}" placeholder="-없이 입력해주세요" class="form-control" />
 	    </div>
   		<div class="col-3">
 		    <button type="submit" class="btn btn-info form-control">검색</button>

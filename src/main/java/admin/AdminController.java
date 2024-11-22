@@ -40,6 +40,11 @@ public class AdminController extends HttpServlet{
 			command.execute(request, response);
 			viewPage += "/adminMemberControl.jsp"; 
 		}
+		else if(com.equals("/AdminMemberSearchControl")) {
+			command = new AdminMemberSearchControl();
+			command.execute(request, response);
+			viewPage += "/adminMemberControl.jsp"; 
+		}
 		else if(com.equals("/AdminMemberDetailControl")) {
 			command = new AdminMemberDetailControl();
 			command.execute(request, response);
@@ -53,14 +58,21 @@ public class AdminController extends HttpServlet{
 			command.execute(request, response);
 			viewPage += "/adminBoardControl.jsp"; 
 		}
-		else if(com.equals("/AdminMessageControl")) {
-			viewPage += "/adminMessageControl.jsp"; 
-		}
 		else if(com.equals("/AdminClaimControl")) {
 			viewPage += "/adminClaimControl.jsp"; 
 		}
 		else if(com.equals("/AdminScheduleControl")) {
 			viewPage += "/adminScheduleControl.jsp"; 
+		}
+		else if(com.equals("/AdminWithdrawControl")) {
+			command = new AdminWithdrawControl();
+			command.execute(request, response);
+			viewPage += "/adminWithdrawControl.jsp"; 
+		}
+		else if(com.equals("/AdminWithdrawSearchControl")) {
+			command = new AdminWithdrawSearchControl();
+			command.execute(request, response);
+			viewPage += "/adminWithdrawSearchControl.jsp"; 
 		}
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);

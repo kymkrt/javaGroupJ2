@@ -72,7 +72,7 @@ public class BoardController extends HttpServlet{
 			command.execute(request, response);
 			viewPage += "marketing/marketingDetailView.jsp"; 
 		}
-		else if (level > 5 || level < 0) {
+		else if (level > 4 || level != 0) {
 		 request.setAttribute("message", "로그인 후 사용하세요");
 		 request.setAttribute("url", "/MemberLogin.member");
 		 viewPage ="/include/message.jsp"; 

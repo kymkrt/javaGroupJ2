@@ -5,7 +5,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>adminMemberControl.jsp</title>
+  <title>adminMemberSearchControl.jsp</title>
   <jsp:include page="/include/bs4.jsp" />
   <script type="text/javascript">
   	'use strict';	
@@ -20,17 +20,17 @@
 <body>
 <p><br /></p>
 <div class="container">
-  <h2 class="text-center mb-3">회 원 리 스 트</h2>
+  <h2 class="text-center mb-3">회 원 검 색 리 스 트</h2>
   <form name="myform" action="AdminMemberSearchControl.ad">
   	<div class="row">
   		<div class="col-3">
 	    	<select name="partkey" id="partkey" class="form-control">
-	    		<option value="mid" selected>아이디</option>
-	    		<option value="nickName">닉네임</option>
-	    		<option value="name">이름</option>
-	    		<option value="email">이메일</option>
-	    		<option value="telMain">연락처</option>
-	    		<option value="companyName">회사명</option>
+	    		<option value="mid" ${partkey=='mid' ? 'selected' : ''}>아이디</option>
+	    		<option value="nickName" ${partkey=='nickName' ? 'selected' : ''}>닉네임</option>
+	    		<option value="name" ${partkey=='name' ? 'selected' : ''}>이름</option>
+	    		<option value="email" ${partkey=='email' ? 'selected' : ''}>이메일</option>
+	    		<option value="telMain" ${partkey=='telMain' ? 'selected' : ''}>연락처</option>
+	    		<option value="companyName" ${partkey=='companyName' ? 'selected' : ''}>회사명</option>
 	    	</select>
 	    </div>
   		<div class="col-6">

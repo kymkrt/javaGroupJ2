@@ -13,7 +13,7 @@
 <jsp:include page="/include/nav.jsp" />
 <p><br /></p>
 <div class="container">
-  <h2 class="text-center mb-2">최근 작성 글</h2>
+  <h2 class="text-center mb-2">최근 작성 글 10건</h2>
   <table class="table table-hover text-center mb-3">
     <tr class="table-secondary">
       <th>번호(idx)</th>
@@ -28,10 +28,15 @@
 	  <c:forEach var="vo" items="${vos}" varStatus="st">
 	    <tr>
 	      <td>${vo.idx}</td>
-	      <td>${board}</td>
+	      <td>${vo.board}</td>
 	      <td>${vo.mid}</td>
 	      <td>${vo.nickName}</td>
-	      <td><a href="">${vo.title}</a></td>
+	      <c:if test="${vo.board == '자유게시판'}">
+	      	<td><a href="FreeDetailView.board?idx=${vo.idx}">${vo.title}</a></td>
+	      </c:if>
+	      <c:if test="${vo.board == '홍보게시판'}">
+	      	<td><a href="MarketingDetailView.board?idx=${vo.idx}">${vo.title}</a></td>
+	      </c:if>
 	      <td>${vo.part}</td>
 	      <td>${vo.wDate}</td>
 	      <td>${vo.good}</td>

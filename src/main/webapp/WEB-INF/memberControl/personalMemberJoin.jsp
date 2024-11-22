@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <c:set var="ctp" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html>
@@ -34,6 +35,7 @@
   	const regexPwdCheckQ = /^[가-힣a-zA-Z0-9]{1,50}$/;
   		
   	function formCheck() {
+  		
   		let pwd = myform.pwd.value;
   		let email = myform.email.value;
   		let pwdCheckAsk = myform.pwdCheckAsk.value;
@@ -75,6 +77,23 @@
 				alert("비밀번호 찾기 질문란의 형식을 확인해주세요");
 				return false;
 			}
+			
+			let fName = document.getElementById("file").value;
+			let maxSize = 1024*1024*10; //저장파일의 최대용량을 10MByte까지로 제한 
+			let ext = fName.substring(fName.lastIndexOf(".")+1).toLowerCase(); //.다음부터 찾아야 해서 +1
+			
+			let fileSize = document.getElementById("file").files[0].size;
+			
+			if(fileSize > maxSize){
+				alert("업로드할 파일의 최대용량은 10MB 입니다")
+				return false;
+			}
+			// 안되는거 목록이면 확장자가 너무 많아서 안된다  되는거로 생각해야됨
+			else if(ext != 'jpg' && ext != 'png' && ext != 'gif'){
+				alert("업로드 가능한 파일은 'jpg/png/gif'만 가능합니다");
+				return false;
+			}
+			
   		myform.action = "MemberJoinOk.member";
   		myform.submit();
 		}
@@ -198,7 +217,7 @@
 <p><br /></p>
 <div class="container">
 	<h4 class="text-center">개인회원가입</h4>
-	<form name="myform" onsubmit="return formCheck()">
+  <form name="myform" method="post" enctype="multipart/form-data">
 	  <div class="box border">
 			<div class="row mb-4 mid">
 				<div class="col-4">
@@ -293,6 +312,17 @@
 			</div>
 			<div class="row mb-4">
 				<div class="col-4">
+					사진
+				</div>
+				<div class="col-8">
+					<input 
+						type="file" name="fName" id="file"
+						class="form-control-file"
+					/>
+				</div>	
+			</div>
+			<div class="row mb-4">
+				<div class="col-4">
 					주소
 				</div>
 				<div class="col-8">
@@ -371,7 +401,7 @@
 			</div>
 			<div class="row mb-4">
 				<div class="col-4">
-					<button type="submit" class="btn btn-success">회원가입</button>
+					<button type="button" onclick="formCheck()" class="btn btn-success">회원가입</button>
 				</div>
 				<div class="col-4">
 					<button type="reset" class="btn btn-warning">다시작성</button>

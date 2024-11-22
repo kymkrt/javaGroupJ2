@@ -20,6 +20,35 @@
 	    text-align: center;
 		}
   </style>
+  <script type="text/javascript">
+  	'use strict';
+  	
+  	function fCheck() {
+		
+  		let mid = myform.mid.value;
+  		let pwd = myform.pwd.value;
+  		
+  		if(mid == "") {
+  			alert("아이디를 입력해주세요");
+  			myform.mid.focus();
+  			return false;
+  		}
+  		else if(pwd == "") {
+  			alert("비밀번호를 입력해주세요");
+  			myform.pwd.focus();
+  			return false;
+  		}
+  		
+  		let ans = confirm("회원 탈퇴 신청을 하시겠습니까?");
+			if(ans) {
+				ans = confirm("회원 탈퇴를 하시면 1개월간 같은 아이디로 가입하실수 없습니다. \n 계속 진행하시겠습니까?");
+				if(ans) {
+					myform.action = "MyWithdrawOk.my";
+					myform.submit();
+				}
+			}
+		}
+  </script>
 </head>
 <body>
 <p><br /></p>

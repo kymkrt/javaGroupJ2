@@ -22,6 +22,8 @@ public class CommonBoardVO {
 	private String file;
 	
 	private int good;
+	
+	private String board;
 
 	public int getIdx() {
 		return idx;
@@ -127,11 +129,19 @@ public class CommonBoardVO {
 		this.good = good;
 	}
 
+	public String getBoard() {
+		return board;
+	}
+
+	public void setBoard(String board) {
+		this.board = board;
+	}
+
 	@Override
 	public String toString() {
 		return "CommonBoardVO [idx=" + idx + ", mid=" + mid + ", nickName=" + nickName + ", title=" + title + ", part="
 				+ part + ", content=" + content + ", hostIp=" + hostIp + ", openSw=" + openSw + ", viewCnt=" + viewCnt
-				+ ", wDate=" + wDate + ", claim=" + claim + ", file=" + file + ", good=" + good + "]";
+				+ ", wDate=" + wDate + ", claim=" + claim + ", file=" + file + ", good=" + good + ", board=" + board + "]";
 	}
 	
 }

@@ -21,11 +21,13 @@ public class MyInfoUpdateCheckOkCommand implements MemberInterface, MyPageInterf
 		String pwd = request.getParameter("pwd")==null ? "" : request.getParameter("pwd");
 		
 		MemberDAO dao = new MemberDAO();
-		
+		System.out.println("로그인 체크");
 		HttpSession session = request.getSession();
 		String sMid = (String)session.getAttribute("sMid");
+		System.out.println("로그인 체크 "+sMid);
 		
 		if(!sMid.equals(mid)) {
+			System.out.println("아이디 다를때");
 			request.setAttribute("message", "회원정보가 없습니다 다시 한번 확인해주세요");
 			request.setAttribute("url", "/MyPageMain.my"); //확장자패턴
 			return;
@@ -38,6 +40,7 @@ public class MyInfoUpdateCheckOkCommand implements MemberInterface, MyPageInterf
 			request.setAttribute("message", "NO");
 			request.setAttribute("url", "/MyInfoUpdate.my"); //확장자패턴
 		}else {
+			System.out.println("아이디 없음");
 			request.setAttribute("message", "회원정보가 없습니다 다시 한번 확인해주세요");
 			request.setAttribute("url", "/MyPageMain.my"); //확장자패턴
 		}

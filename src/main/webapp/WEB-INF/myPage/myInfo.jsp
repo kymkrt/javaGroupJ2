@@ -22,6 +22,12 @@
 			<td>${vo.nickName}</td>
 		</tr>  
 		<tr>
+			<th>사진</th>
+			<td>
+				<img alt="자기소개 사진" src="${ctp}${vo.photo}" style="max-width: 400px; height: 400px;" />
+			</td>
+		</tr>  
+		<tr>
 			<th>주전화번호</th>
 			<td>${vo.telMain}</td>
 		</tr>  
@@ -40,10 +46,6 @@
 		<tr>
 			<th>자기소개</th>
 			<td>${vo.content}</td>
-		</tr>  
-		<tr>
-			<th>사진</th>
-			<td>${vo.photo}</td>
 		</tr>  
 		<tr>
 			<th>광고허용여부</th>
