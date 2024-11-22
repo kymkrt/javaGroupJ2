@@ -125,6 +125,28 @@
   		
   	</div>
   </div>
+<script type="text/javascript">
+  	'use strict';
+
+    //window.onload = function() {
+        function fCheck() {
+            let mid = myform.mid.value;
+            let pwd = myform.pwd.value;
+
+            if (mid == "") {
+                alert("아이디를 입력해주세요");
+                myform.mid.focus();
+                return false;
+            } else if (pwd == "") {
+                alert("비밀번호를 입력해주세요");
+                myform.pwd.focus();
+                return false;
+            }
+
+            myform.submit();
+        }
+    //}
+</script>
 <p><br /></p>
 </body>
 </html>
