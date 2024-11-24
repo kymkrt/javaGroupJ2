@@ -36,12 +36,45 @@ public class MessageController extends HttpServlet{
 		else if(com.equals("/MessageSend")) {
 			viewPage += "/myPage/messageSend.jsp";
 		}
+		else if(com.equals("/MessageChat")) {
+			command = new MessageChat();
+			command.execute(request, response);
+			viewPage += "/myPage/messageChat.jsp";
+		}
 		else if(com.equals("/MessageSendOk")) {
 			command = new MessageSendOk();
 			command.execute(request, response);
 			viewPage = "/include/message.jsp"; 
 		}
+		else if(com.equals("/MessageChatSendOk")) {
+			command = new MessageChatSendOk();
+			command.execute(request, response);
+			viewPage += "/myPage/messageChat.jsp"; 
+		}
+		
+		
+		else if(com.equals("/MessageChatList")) {
+			command = new MessageChatList();
+			command.execute(request, response);
+			viewPage += "/myPage/messageChat.jsp"; 
+		}
+		
+		
+		else if(com.equals("/TestMessageControl")) {
+			System.out.println("테스트 메세지 컨트롤");
+			command = new MyMessageControl();
+			command.execute(request, response);
+			viewPage = "/WEB-INF/introduceCompany/tech.jsp"; 
+		}
+		else if(com.equals("/TestMessageChat")) {
+			command = new MessageChat();
+			command.execute(request, response);
+			viewPage = "/WEB-INF/introduceCompany/vision.jsp"; 
+		}
+		
+		
 		else if(com.equals("/MyMessageControl")) {
+			System.out.println("마이 메세지 컨트롤");
 			command = new MyMessageControl();
 			command.execute(request, response);
 			viewPage += "/myPage/myMessage.jsp"; 
@@ -72,6 +105,7 @@ public class MessageController extends HttpServlet{
 			viewPage = "/include/message.jsp";
 		}
 		else if(com.equals("/AdminMessageControl")) {
+			System.out.println("어드민 메시지 컨트롤");
 			command = new AdminMessageControl();
 			command.execute(request, response);
 			viewPage += "/admin/adminMessageControl.jsp"; 

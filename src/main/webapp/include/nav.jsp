@@ -46,7 +46,9 @@
       </a>
       <div class="dropdown-menu">
         <a class="dropdown-item" href="Represent.intro">대표</a>
-        <a class="dropdown-item" href="Tech.intro">기술</a>
+        <!-- <a class="dropdown-item" href="Tech.intro">기술</a> -->
+        <!-- <a class="dropdown-item" href="Vision.intro">주요상품</a> -->
+        <a class="dropdown-item" href="TestMessageControl.msg">기술</a>
         <a class="dropdown-item" href="Vision.intro">주요상품</a>
       </div>
     </li>

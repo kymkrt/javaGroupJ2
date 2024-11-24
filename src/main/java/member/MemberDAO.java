@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import common.GetConn;
 
@@ -37,7 +39,6 @@ public class MemberDAO {
 	public MemberVO getMemberIdCheck(String mid, String pwd) {
 		MemberVO vo = new MemberVO();
 		try { 
-			int sw = 0;
 			sql = "select * from member where mid = ? and pwd = ? and userDel != 'Ok'";
 			
 			pstmt = conn.prepareStatement(sql);
@@ -344,6 +345,46 @@ public class MemberDAO {
 			rsClose();
 		}
 		return vo;
+	}
+	
+	//회원 정보 가져오기 회원 버전
+	public List<MemberVO> getMemberAllInfo() {
+		List<MemberVO> vos = new ArrayList<MemberVO>();
+		try {
+			sql="select * from javagroup2.member where userDel = 'NO'";
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			 while(rs.next()) {
+				 MemberVO vo = new MemberVO();
+				vo.setIdx(rs.getInt("idx"));
+				vo.setMid(rs.getString("mid"));
+				vo.setNickName(rs.getString("nickName"));
+				vo.setName(rs.getString("name"));
+				vo.setTelMain(rs.getString("telMain"));
+				vo.setTelSub(rs.getString("telSub"));
+				vo.setAddress(rs.getString("address"));
+				vo.setEmail(rs.getString("email"));
+				vo.setContent(rs.getString("content"));
+				vo.setPhoto(rs.getString("photo"));
+				vo.setAdvertiseCheck(rs.getString("advertiseCheck"));
+				vo.setUserInfo(rs.getString("userInfo"));
+				vo.setUserType(rs.getString("userType"));
+				//사업자일시 추가 부분
+				vo.setFax(rs.getString("fax"));
+				vo.setCompanyName(rs.getString("companyName"));
+				vo.setBSNum(rs.getString("BSNum"));
+				//관리자 처리 부분
+				vo.setMemoryMid(rs.getString("memoryMid"));
+				
+				vos.add(vo);
+			}
+		} catch (SQLException e) {
+			System.out.println("sql오류(getMemberAllInfo) : "+e.getMessage());
+		}finally {
+			rsClose();
+		}
+		return vos;
 	}
 
 	//개인정보수정 확인

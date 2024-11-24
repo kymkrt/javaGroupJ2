@@ -43,7 +43,7 @@ public class MessageDAO {
 			sql = "select * from messagechat where receiver = ? order by wDate desc limit 8";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, nicnName);
-			pstmt.setString(2, nicnName);
+			//pstmt.setString(2, nicnName);
 			
 			rs = pstmt.executeQuery();
 			
@@ -73,7 +73,7 @@ public class MessageDAO {
 			sql = "select * from messagechat where sender = ? order by wDate desc limit 8";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, nicnName);
-			pstmt.setString(2, nicnName);
+			//pstmt.setString(2, nicnName);
 			
 			rs = pstmt.executeQuery();
 			
@@ -244,6 +244,39 @@ public class MessageDAO {
 			
 		} catch (SQLException e) {
 			System.out.println("sql오류(getMyAllMessageList) : "+e.getMessage());
+		}finally {
+			rsClose();
+		}
+		return vos;
+	}
+	
+	//내가 주고 받은 모든 메세지 실시간 채팅
+	public List<MessageVO> getMyAllChatMessageList(String receiver, String sender) {
+		List<MessageVO> vos =  new ArrayList<>();
+		try {
+			sql = "select * from messagechat where (receiver = ? and sender = ?) or (receiver = ? and sender = ?) order by wDate";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, receiver);
+			pstmt.setString(2, sender);
+			pstmt.setString(3, sender);
+			pstmt.setString(4, receiver);
+			
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				MessageVO vo = new MessageVO();
+				vo.setIdx(rs.getInt("idx"));
+				vo.setSender(rs.getString("sender"));
+				vo.setReceiver(rs.getString("receiver"));
+				vo.setContent(rs.getString("content"));
+				vo.setwDate(rs.getString("wDate"));
+				vo.setRead(rs.getInt("read"));
+				
+				vos.add(vo);
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("sql오류(getMyAllChatMessageList) : "+e.getMessage());
 		}finally {
 			rsClose();
 		}

@@ -68,8 +68,8 @@
     </tr>
 	  <c:forEach var="vo" items="${vos}" varStatus="st">
 	    <tr>
-	      <td>${vo.mid}</td>
-	      <td><a href="AdminMemberDetailControl.ad?idx=${vo.idx}">${vo.nickName}</a></td>
+	      <td><a href="MessageChat.msg?mid=${vo.mid}">${vo.mid}</a></td>
+	      <td>${vo.nickName}</td>
 	      <td>${vo.email}</td>
 	      <td>${vo.companyName}</td>
 	      <td>${vo.userType}</td>

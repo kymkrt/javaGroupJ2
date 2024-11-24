@@ -10,7 +10,7 @@
   <script type="text/javascript">
   	'use strict';
   	
-  	function send() {
+  	 function send() {
   		let sender = myform.sender.value;
   		let receiver = myform.receiver.value;
   		let content = myform.content.value;
@@ -38,40 +38,32 @@
   	    let sender = myform.sender.value; // 현재 사용자
   	    let receiver = myform.receiver.value; // 채팅 상대
 
-  	  $.ajax({
-  	    url: 'MessageChatList.msg',
-  	    type: 'GET',
-  	    data: { sender, receiver },
-  	    success: function (response) {
-  	        console.log("Received response:", response);
-			
-  	        // 만약 response가 객체일 경우, 그 안에 메시지 배열이 포함되어 있을 수 있음
-  	        if (Array.isArray(response.messages)) {
-  	            let messages = response.messages; // 메시지 배열
+  	    $.ajax({
+  	        url: 'MessageChatList',
+  	        type: 'GET',
+  	        data: { sender, receiver },
+  	        success: function (messages) {
   	            let messageContainer = $('#messageContainer');
   	            messageContainer.empty();
 
   	            messages.forEach(msg => {
-  	                let isSentByMe = msg.sender.trim() === sender.trim();
+  	                // 내가 보낸 메시지는 오른쪽 정렬, 받은 메시지는 왼쪽 정렬
+  	                let isSentByMe = msg.sender === sender;
   	                let messageHtml = `
-  	                    <div class="${isSentByMe ? 'message-right' : 'message-left'}">
-  	                        <strong>${msg.receiver}</strong>/ 
+  	                    <div style="text-align: ${isSentByMe ? 'right' : 'left'};">
+  	                    	<strong>${msg.receiver}</strong>/
   	                        <strong>${msg.sender}</strong>: ${msg.content}
   	                        <small>${msg.wDate}</small>
   	                    </div>`;
   	                messageContainer.append(messageHtml);
   	            });
-  	        } else {
-  	            alert('메시지 데이터가 배열 형식이 아닙니다.');
+  	        },
+  	        error: function () {
+  	            alert('메시지를 불러오지 못했습니다.');
   	        }
-  	    },
-  	    error: function (jqXHR, textStatus, errorThrown) {
-  	        alert('메시지를 불러오지 못했습니다.');
-  	        console.error("AJAX Error:", textStatus, errorThrown);
-  	        console.log("Response:", jqXHR.responseText);
-  	    }
-  	});
-  	    
+  	    });
+  	}
+  	
   	$(document).ready(function () {
   	    loadMessages();
   	    setInterval(loadMessages, 5000); // 5초마다 새 메시지 불러오기
@@ -87,7 +79,7 @@
   <div id="messageContainer" style="border: 1px solid #ccc; padding: 10px; height: 300px; overflow-y: scroll;">
   	<!-- 메시지가 실시간으로 표시됩니다 -->
   </div>
-  <form action="MessageChatSendOk.msg" name="myform">
+  <form action="MessageSendOk.msg">
   	<table class="table table-bordered text-center">
   		<tr>
   			<th class="table-secondary">보내는이</th>

@@ -136,5 +136,57 @@
   	</div>
   </div>
 <p><br /></p>
+<script type="text/javascript">
+	'use strict';
+	
+	function send() {
+		const myform = document.forms['myform']
+  		let sender = myform.sender.value;
+  		let receiver = myform.receiver.value;
+  		let content = myform.content.value;
+  		
+  		 $.ajax({
+  	        url: 'MessageChatSendOk.msg',
+  	        type: 'POST',
+  	        data: { sender, receiver, content },
+  	        success: function (res) {
+  	            if (res != '0') {
+  	                alert('메시지가 전송되었습니다.');
+  	                loadMessages(); // 메시지 목록 다시 불러오기
+  	                myform.content.value = ''; // 입력창 초기화
+  	            } else {
+  	                alert('메시지 전송 실패');
+  	            }
+  	        },
+  	        error: function () {
+  	            alert('통신 오류(send)');
+  	        }
+  	    });
+  	}
+  	
+	function loadMessages() {
+	    $.ajax({
+	        url: 'your-server-endpoint', // 요청 URL
+	        method: 'GET',
+	        dataType: 'json',
+	        success: function (response) {
+	            if (response && response.sender) {
+	                console.log('Sender:', response.sender);
+	                // 메시지 처리 로직
+	            } else {
+	                console.warn('Invalid response data:', response);
+	            }
+	        },
+	        error: function (error) {
+	            console.error('Error loading messages:', error);
+	        }
+	    });
+	}
+  	
+  	$(document).ready(function () {
+  	    loadMessages();
+  	    setInterval(loadMessages, 5000); // 5초마다 새 메시지 불러오기
+  	});
+</script>
 </body>
 </html>

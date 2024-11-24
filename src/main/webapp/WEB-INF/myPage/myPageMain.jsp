@@ -32,7 +32,7 @@
     }
 		
   </style>
-  <script defer>
+  <script>
   	'use script';
   
   function loadContent(event) {
@@ -130,6 +130,7 @@
 
     //window.onload = function() {
         function fCheck() {
+        	const myform = document.forms['myform']
             let mid = myform.mid.value;
             let pwd = myform.pwd.value;
 

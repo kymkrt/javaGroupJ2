@@ -76,7 +76,7 @@
 	  <c:forEach var="vo" items="${vos}" varStatus="st">
 	    <tr>
 	      <td>${vo.idx}</td>
-	      <td><a href="AdminMemberDetailControl.ad?idx=${vo.idx}">${vo.mid}</a></td>
+	      <td><a href="MessageChat.msg?mid=${vo.mid}">${vo.mid}</a></td>
 	      <td>${vo.memoryMid}</td>
 	      <td>${vo.nickName}</td>
 	      <td>${vo.name}</td>

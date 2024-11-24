@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import admin.AdminDAO;
+import member.MemberDAO;
+import member.MemberVO;
 
 public class AdminMessageControl implements MessageInterface {
 
@@ -19,8 +21,14 @@ public class AdminMessageControl implements MessageInterface {
 		List<MessageVO> receVos = dao.getAdminReceMessageList();
 		List<MessageVO> sendVos = dao.getAdminSendMessageList();
 		
-		request.setAttribute("receVos", receVos);
+		
+		MemberDAO dao2 = new MemberDAO();
+		List<MemberVO> vos = dao2.getMemberAllInfo();
+		
 		request.setAttribute("sendVos", sendVos);
+		request.setAttribute("receVos", receVos);
+		
+		request.setAttribute("vos", vos);
 	}
 
 }
