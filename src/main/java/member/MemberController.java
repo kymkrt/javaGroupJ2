@@ -75,7 +75,7 @@ public class MemberController extends HttpServlet{
 			command.execute(request, response);
 			viewPage += "/idpasswordSearch.jsp"; 
 		}
-		else if(level > 4 || level != 0) {
+		else if(level > 4) {
 			request.setAttribute("message", "회원만 이용할수 있습니다");
 			request.setAttribute("url", "/MainPage");
 			viewPage = "/include/message.jsp";

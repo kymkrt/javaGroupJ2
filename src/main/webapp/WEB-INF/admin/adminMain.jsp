@@ -166,7 +166,7 @@
   	
 	function loadMessages() {
 	    $.ajax({
-	        url: 'your-server-endpoint', // 요청 URL
+	        url: 'MessageChatList.msg', // 요청 URL
 	        method: 'GET',
 	        dataType: 'json',
 	        success: function (response) {
@@ -188,5 +188,67 @@
   	    setInterval(loadMessages, 5000); // 5초마다 새 메시지 불러오기
   	});
 </script>
+<!-- <script type="text/javascript">
+  	'use strict';
+  	
+  	 function send() {
+  		let sender = myform.sender.value;
+  		let receiver = myform.receiver.value;
+  		let content = myform.content.value;
+  		
+  		 $.ajax({
+  	        url: 'MessageChatSendOk.msg',
+  	        type: 'POST',
+  	        data: { sender, receiver, content },
+  	        success: function (res) {
+  	            if (res != '0') {
+  	                alert('메시지가 전송되었습니다.');
+  	                loadMessages(); // 메시지 목록 다시 불러오기
+  	                myform.content.value = ''; // 입력창 초기화
+  	            } else {
+  	                alert('메시지 전송 실패');
+  	            }
+  	        },
+  	        error: function () {
+  	            alert('통신 오류(send)');
+  	        }
+  	    });
+  	}
+  	
+  	function loadMessages() {
+  	    let sender = myform.sender.value; // 현재 사용자
+  	    let receiver = myform.receiver.value; // 채팅 상대
+
+  	    $.ajax({
+  	        url: 'MessageChatList.msg',
+  	        type: 'GET',
+  	        data: { sender, receiver },
+  	        success: function (messages) {
+  	            let messageContainer = $('#messageContainer');
+  	            messageContainer.empty();
+
+  	            messages.forEach(msg => {
+  	                // 내가 보낸 메시지는 오른쪽 정렬, 받은 메시지는 왼쪽 정렬
+  	                let isSentByMe = msg.sender === sender;
+  	                let messageHtml = `
+  	                    <div style="text-align: ${isSentByMe ? 'right' : 'left'};">
+  	                    	<strong>${msg.receiver}</strong>/
+  	                        <strong>${msg.sender}</strong>: ${msg.content}
+  	                        <small>${msg.wDate}</small>
+  	                    </div>`;
+  	                messageContainer.append(messageHtml);
+  	            });
+  	        },
+  	        error: function () {
+  	            alert('메시지를 불러오지 못했습니다.');
+  	        }
+  	    });
+  	}
+  	
+  	$(document).ready(function () {
+  	    loadMessages();
+  	    setInterval(loadMessages, 5000); // 5초마다 새 메시지 불러오기
+  	});
+  </script> -->
 </body>
 </html>

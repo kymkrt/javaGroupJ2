@@ -168,7 +168,7 @@
 					<div class="col-12 input-group">
 						<input 
 							type="text" name="nickName" id="nickName"
-							placeholder="영문 및 숫자, 한글 _기호 최소3자 최대 10자" class="form-control" required 
+							placeholder="영문 및 숫자, 한글 _기호 최소3자 최대 10자 / 현재 닉네임 ${sNickName}" class="form-control" required 
 						/>
 						<div class="input-group-append">
 				    	<button type="button" onclick="nickNameCheck()" class="btn btn-info">닉네임체크</button>

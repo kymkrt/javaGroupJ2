@@ -122,14 +122,14 @@
 			<div>고객이 원하는 방식, 원하는 형식으로 식물자원을 생산할수 있습니다</div><br/>
 			<div class="card-deck">
 					<div class="card" style="width:400px">
-					  <img class="card-img-top" src="" alt="Card image">
+					  <img class="card-img-top" src="${ctp}/images/1.jpg" width="200px" height="300px" alt="Card image">
 					  <div class="card-body">
 					    <h4 class="card-title">노지재배</h4>
 					    <p class="card-text">품종에 최적화된 PH를 제공하는 토지를 이용합니다</p>
 					  </div>
 					</div>
 					<div class="card" style="width:400px">
-					  <img class="card-img-top" src="" alt="Card image">
+					  <img class="card-img-top" src="${ctp}/images/6.jpg" width="200px" height="300px" alt="Card image">
 					  <div class="card-body">
 					    <h4 class="card-title">수경재배</h4>
 					    <p class="card-text">24시간 제어되는 에어로포닉스 기술을 이용하여</p>
@@ -137,7 +137,7 @@
 					  </div>
 					</div>
 					<div class="card" style="width:400px">
-					  <img class="card-img-top" src="" alt="Card image">
+					  <img class="card-img-top" src="${ctp}/images/1.jpg" width="200px" height="300px" alt="Card image">
 					  <div class="card-body">
 					    <h4 class="card-title">조직배양</h4>
 					    <p class="card-text">최첨단 SMART 신기술로 최소한의 호르몬만 이용하여</p>

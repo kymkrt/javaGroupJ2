@@ -28,7 +28,7 @@ public class MessageController extends HttpServlet{
 		HttpSession session = request.getSession();
 		int level = session.getAttribute("sLevel")==null ? 999 : (int)session.getAttribute("sLevel");
 		
-		if(level != 0 || level > 4) {
+		if(level > 4) {
 			request.setAttribute("message", "회원만 사용가능합니다");
 			request.setAttribute("url", "/MemberLogin.member");
 			viewPage = "/include/message.jsp";
