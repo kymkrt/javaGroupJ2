@@ -48,9 +48,9 @@
   <form name="loginForm" action="MemberLoginCheck.member">
   	<h3 class="display-6 mb-3">로그인</h3>
   	<div class="mb-2">아이디</div>
-  	<input type="text" name="mid" class="form-control mb-3" />
+  	<input type="text" name="mid" value="admin" class="form-control mb-3" />
   	<div class="mb-2">비밀번호</div>
-  	<input type="password" name="pwd" class="form-control mb-3"  />
+  	<input type="password" name="pwd" value="1234" class="form-control mb-3"  />
   	<div class="row">
 	  	<div class="col">
 			  <button type="submit" class="btn btn-success">로그인</button>

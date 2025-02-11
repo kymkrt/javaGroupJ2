@@ -125,7 +125,7 @@ public class MemberDAO {
 		MemberVO vo = new MemberVO();
 		
 		try {
-			sql = "select * from javagroup2.member where mid = ?";
+			sql = "select * from member where mid = ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, mid);
 			rs = pstmt.executeQuery();
@@ -173,7 +173,7 @@ public class MemberDAO {
 		MemberVO vo = new MemberVO();
 		
 		try {
-			sql = "select * from javagroup2.member where nickName = ?";
+			sql = "select * from member where nickName = ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, nickName);
 			rs = pstmt.executeQuery();
@@ -222,7 +222,7 @@ public class MemberDAO {
 		int res = 0;
 		try {
 			if(vo.getUserType().trim().equals("개인")) {
-				sql = "insert into javagroup2.member values(default,?,?,?,?,?,?,?,?,?,?,?,?,'개인',?,?,default,default,"
+				sql = "insert into member values(default,?,?,?,?,?,?,?,?,?,?,?,?,'개인',?,?,default,default,"
 						+ "default,1,default,default,default,default,default,?)";
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setString(1, vo.getMid());
@@ -303,7 +303,7 @@ public class MemberDAO {
 	public MemberVO getMemberInfo(String mid) {
 		MemberVO vo = new MemberVO();
 		try {
-			sql="select * from javagroup2.member where mid = ?";
+			sql="select * from member where mid = ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, mid);
 			rs = pstmt.executeQuery();
@@ -351,7 +351,7 @@ public class MemberDAO {
 	public List<MemberVO> getMemberAllInfo() {
 		List<MemberVO> vos = new ArrayList<MemberVO>();
 		try {
-			sql="select * from javagroup2.member where userDel = 'NO'";
+			sql="select * from member where userDel = 'NO'";
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			
